@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreateEvent = () => {
+const page = () => {
   return (
     <div className="bg-gray-100 flex justify-center items-center min-h-screen">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
@@ -102,4 +102,4 @@ const CreateEvent = () => {
   );
 };
 
-export default CreateEvent;
+export default page;
