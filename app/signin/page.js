@@ -9,23 +9,23 @@ const page = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               Email address
             </label>
             <input
               type="email"
               id="email"
-              placeholder="123@abc.com"
+              placeholder="Enter Your Email"
               name="email"
-              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500"
+              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500 text-black"
               required
             />
           </div>
           <div className="mb-4 relative">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               Password
             </label>
@@ -33,7 +33,7 @@ const page = () => {
               type="password"
               id="password"
               name="password"
-              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500"
+              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500 text-black"
               required
             />
           </div>
