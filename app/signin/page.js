@@ -4,7 +4,7 @@ const page = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm bg-white p-6 rounded-sm shadow-lg">
-        <h2 className="text-4xl font-bold text-center text-red-700">Sign In</h2>
+        <h2 className="text-4xl font-bold text-center text-primary">Sign In</h2>
         <form className="mt-4">
           <div className="mb-4">
             <label
@@ -30,9 +30,11 @@ const page = () => {
               Password
             </label>
             <input
+          
               type="password"
               id="password"
               name="password"
+              placeholder="Enter Your Password"
               className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500 text-black"
               required
             />
@@ -47,7 +49,7 @@ const page = () => {
           </div>
           <button
             type="submit"
-            className="mt-6 w-full px-4 py-2 text-white bg-red-800 rounded-md shadow-sm focus:shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            className="mt-6 w-full px-4 py-2 text-white bg-primary rounded-md shadow-sm focus:shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
           >
             Sign In
           </button>
