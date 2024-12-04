@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { Poppins } from 'next/font/google'
+import Navbar from "@/components/Navbar";
  
 const poppins = Poppins({
   weight: '400',
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Navbar/>
         {children}
       </body>
     </html>
