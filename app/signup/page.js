@@ -31,7 +31,7 @@ const page = () => {
               Mobile number
             </label>
             <input
-              type="tel"
+              type="number"
               placeholder="Enter your Mobile Number"
               id="mobile"
               className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary text-black"
