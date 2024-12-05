@@ -83,14 +83,14 @@ const page = () => {
                   id="user"
                   type="radio"
                   className="mr-2"/>
-                  <label className="text-black" for="user">User</label>
+                  <label className="text-black" htmlFor="user">User</label>
                 <input
                   name="account_type"
                   value="organiser"
                   id="organiser"
                   type="radio"
                   className="mr-2 ml-6"/>
-                  <label className="text-black" for="organiser">Organiser</label>
+                  <label className="text-black" htmlFor="organiser">Organiser</label>
               </div>
             </div>
           </div>
