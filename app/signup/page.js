@@ -83,7 +83,7 @@ const page = () => {
                   id="user"
                   type="radio"
                   className="mr-2"/>
-                  <label class="text-black">User</label>
+                  <label className="text-black">User</label>
                 <input
                   name="account_type"
                   value="organiser"
