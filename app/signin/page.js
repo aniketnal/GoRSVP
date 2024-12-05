@@ -18,7 +18,7 @@ const page = () => {
               id="email"
               placeholder="Enter Your Email"
               name="email"
-              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500 text-black"
+              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary text-black"
               required
             />
           </div>
@@ -35,30 +35,30 @@ const page = () => {
               id="password"
               name="password"
               placeholder="Enter Your Password"
-              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-500 text-black"
+              className="mt-1 w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary text-black"
               required
             />
           </div>
           <div className="flex justify-end">
             <a
               href="#"
-              className="text-red-600 hover:underline hover:text-red-700"
+              className="text-primary text-lg hover:underline hover:text-secondary"
             >
               Forgot password?
             </a>
           </div>
           <button                                 
             type="submit"
-            className="mt-6 w-full px-4 py-2 text-white bg-primary rounded-md shadow-sm focus:shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            className="mt-6 w-full px-4 py-2 text-white bg-primary rounded-md shadow-sm focus:shadow-md hover:bg-secondary  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             Sign In
           </button>
         </form>
-        <p className="mt-6 text-center text-gray-600">
+        <p className="mt-6 text-center text-black">
           Don't have an account?{' '}
           <a
-            href="#"
-            className="text-red-600 hover:underline hover:text-red-700"
+            href="./signup"
+            className="text-primary text-lg hover:underline hover:text-secondary"
           >
             Sign Up
           </a>
