@@ -11,8 +11,8 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --primary: #b44632;
-    --secondary: #A52A2A;      
+    --secondary: #b44632;
+    --primary: #A52A2A;      
   }
 }
 
@@ -20,4 +20,17 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: poppins, Helvetica, sans-serif;
+}
+
+/* Following code hides Arrow Buttons on number fields for respective browsers */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

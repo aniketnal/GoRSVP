@@ -10,7 +10,7 @@ const page = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-black mb-1"
+              className="block text-md font-medium text-black mb-1"
             >
               Email address
             </label>
@@ -26,7 +26,7 @@ const page = () => {
           <div className="mb-4">
             <label
               htmlFor="mobile"
-              className="block text-sm font-medium text-black mb-1"
+              className="block text-md font-medium text-black mb-1"
             >
               Mobile number
             </label>
@@ -42,7 +42,7 @@ const page = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-black mb-1"
+              className="block text-md font-medium text-black mb-1"
             >
               Password
             </label>
@@ -58,7 +58,7 @@ const page = () => {
           <div className="mb-4">
             <label
               htmlFor="confirm-password"
-              className="block text-black text-sm font-medium mb-1"
+              className="block text-black text-md font-medium mb-1"
             >
               Confirm Password
             </label>
@@ -66,13 +66,13 @@ const page = () => {
               type="password"
               placeholder="Confirm Password"
               id="confirm-password"
-              className="w-full text-black px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-red-primary"
+              className="w-full text-black px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
 
           {/* Account Type */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-black mb-1">
+            <label className="block text-md font-medium text-black mb-1">
               Account Type
             </label>
             <div className="flex justify-start">
@@ -83,14 +83,14 @@ const page = () => {
                   id="user"
                   type="radio"
                   className="mr-2"/>
-                  <label className="text-black">User</label>
+                  <label className="text-black" for="user">User</label>
                 <input
                   name="account_type"
                   value="organiser"
                   id="organiser"
                   type="radio"
                   className="mr-2 ml-6"/>
-                  <label className="text-black">Organiser</label>
+                  <label className="text-black" for="organiser">Organiser</label>
               </div>
             </div>
           </div>
@@ -110,7 +110,7 @@ const page = () => {
         </form>
 
         {/* Sign In Redirect */}
-        <p className="text-center text-lg text-black mt-4">
+        <p className="text-center text-md text-black mt-4">
           Already have an account?{" "}
           <a href="./signin" className="text-primary hover:underline hover:text-secondary">
             Sign In

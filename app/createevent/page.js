@@ -15,7 +15,7 @@ const page = () => {
                 type="text"
                 id="eventTitle"
                 placeholder="Hackathon 2025"
-                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-black font-medium"
+                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
@@ -25,7 +25,7 @@ const page = () => {
               <input
                 type="date"
                 id="eventDate"
-                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-black font-medium"
+                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
@@ -35,7 +35,7 @@ const page = () => {
               <input
                 type="time"
                 id="eventTime"
-                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-black font-medium"
+                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
@@ -46,7 +46,7 @@ const page = () => {
                 type="text"
                 id="location"
                 placeholder="Nashik Central"
-                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-black font-medium"
+                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
@@ -57,7 +57,7 @@ const page = () => {
                 type="number"
                 id="maxCapacity"
                 placeholder="e.g. 500"
-                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-black font-medium"
+                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
@@ -68,7 +68,7 @@ const page = () => {
                 type="url"
                 id="bannerUrl"
                 placeholder="e.g. drive.google.com/path"
-                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-black font-medium"
+                className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
           </div>
@@ -80,7 +80,7 @@ const page = () => {
               id="description"
               rows="4"
               placeholder="Write event description here..."
-              className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-black font-medium"
+              className="w-full resize-none px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               spellCheck="true"
             ></textarea>
           </div>

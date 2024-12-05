@@ -5,11 +5,11 @@ const page = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm bg-white p-6 rounded-sm shadow-lg">
         <h2 className="text-4xl font-bold text-center text-primary">Sign In</h2>
-        <form className="mt-4">
+        <form className="mt-6">
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-black"
+              className="block text-md font-medium text-black"
             >
               Email address
             </label>
@@ -25,7 +25,7 @@ const page = () => {
           <div className="mb-4 relative">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-black"
+              className="block text-md font-medium text-black"
             >
               Password
             </label>
@@ -42,7 +42,7 @@ const page = () => {
           <div className="flex justify-end">
             <a
               href="#"
-              className="text-primary text-lg hover:underline hover:text-secondary"
+              className="text-primary text-sm hover:underline hover:text-secondary"
             >
               Forgot password?
             </a>
@@ -58,7 +58,7 @@ const page = () => {
           Don't have an account?{' '}
           <a
             href="./signup"
-            className="text-primary text-lg hover:underline hover:text-secondary"
+            className="text-primary text-md hover:underline hover:text-secondary"
           >
             Sign Up
           </a>
