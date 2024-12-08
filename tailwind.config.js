@@ -12,6 +12,7 @@ module.exports = {
         foreground: "var(--foreground)",
         primary: "var(--primary)",
         secondary: "var(--secondary)",
+        footertext: "var(--footertext)",
       },
     },
   },
