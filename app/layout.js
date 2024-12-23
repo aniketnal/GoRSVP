@@ -23,7 +23,7 @@ const geistMono = localFont({
 
 export const metadata = {
   title: "GoRSVP - Event Manager",
-  description: "Manage you events like a PRO !",
+  description: "Manage your events like a PRO !",
 };
 
 export default function RootLayout({ children }) {
