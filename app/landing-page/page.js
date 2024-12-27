@@ -1,3 +1,9 @@
+// DEPRECATED, NOT IN USE
+// COPIED TO ../page.js (main landing page)
+
+
+
+
 import React from 'react';
 
 const LandingPage= () => {
