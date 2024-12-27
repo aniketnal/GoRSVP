@@ -76,13 +76,4 @@ Next.js Documentation - learn about Next.js features and API.
 Learn Next.js - an interactive Next.js tutorial.
 You can check out the Next.js 
 
-GitHub repository - your feedback and contributions are welcome!
-
-### 📩Contact
-For questions or feedback, feel free to reach out:
-
-Email: your- EMAIL BAKI HAI@sabhappy.com
-
-GitHub: https://github.com/yourusername
-
 
