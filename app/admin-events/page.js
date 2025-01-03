@@ -1,77 +1,121 @@
 "use client"
 import React from 'react';
-import { useState } from 'react';
-// Rest of your imports
-import { 
-  LayoutDashboard, 
-  Users, 
-  Calendar, 
-  Ticket, 
-  UserCog, 
-  Menu, 
-  X 
-} from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Link from 'next/link';
+import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
 export default function DashboardLayout() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  const stats = [
-    { title: 'Total Users', value: '120', change: '12.6% from last month', icon: <Users className="w-6 h-6 text-red-800" /> },
-    { title: 'Total Organizers', value: '30', change: '12.6% from last month', icon: <UserCog className="w-6 h-6 text-red-800" /> },
-    { title: 'Total Event/Sessions', value: '40', change: '12.6% from last month', icon: <Calendar className="w-6 h-6 text-red-800" /> },
-    { title: "Total RSVP's", value: '200', change: '12.6% from last month', icon: <Ticket className="w-6 h-6 text-red-800" /> }
-  ];
 
   const navItems = [
-    { icon: <LayoutDashboard className="w-5 h-5" />, label: 'admin-dashboard' },
-    { icon: <Users className="w-5 h-5" />, label: 'admin-users' },
-    { icon: <UserCog className="w-5 h-5" />, label: 'admin-organizers' },
-    { icon: <Calendar className="w-5 h-5" />, label: 'admin-events', active: true }
+    {  label: 'admin-dashboard '},
+    {  label: 'admin-users '},
+    {  label: 'admin-organizers' },
+    {  label: 'admin-events' }
+  ];
+ 
+  const generateSampleData = () => {
+    const firstnames = [
+      'James',
+      'Emma',
+      'Michael',
+      'Sophia',
+      'William',
+      'Olivia',
+      'John',
+      'Ava'
+  ];
+  
+  const lastnames = [
+      'Smith',
+      'Johnson',
+      'Williams',
+      'Brown',
+      'Jones',
+      'Davis',
+      'Miller',
+      'Wilson'
+  ];
+    const statuses = ['Active', 'Pending', 'Completed', 'Cancelled', 'On Hold'];
+    const emails = [
+      // Professional Emails
+      'john.doe@company.com',
+      'sarah.smith@enterprise.co.uk',
+      'michael.brown@corporation.net',
+      'm.johnson@business.org',
+      
+      // Gmail Accounts
+      'davidwilson2024@gmail.com',
+      'emily.parker85@gmail.com',
+      'tech.ninja@gmail.com',
+      'professional.coder@gmail.com',
+      'webdev.master@gmail.com'
+    ];
+    
+    return Array.from({ length: 100 }, (_, index) => ({
+      id: index + 1,
+      eventID: `ORD-${Math.floor(10000 + Math.random() * 90000)}`,
+      organizerID: `ORD-${Math.floor(10000 + Math.random() * 90000)}`,
+      eventname: firstnames[Math.floor(Math.random() * firstnames.length)],
+      organizer: lastnames[Math.floor(Math.random() * lastnames.length)],
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      email: emails[Math.floor(Math.random() * emails.length)],
+      rsvp: Math.floor(20 + Math.random() * 200),
+      date: new Date(2024, 0, 1 + Math.floor(Math.random() * 365)).toLocaleDateString()
+    }));
+  };
+
+  const rows = generateSampleData();
+
+  const columns = [
+    { field: 'eventID', headerName: 'Event id', width: 160 },
+    {field: 'organizerID', headerName: 'Oraganizer id', width: 160},
+    { field: 'eventname', headerName: 'Event Name', width: 160 },
+    { field: 'organizer', headerName: 'Organizer Name', width: 160 },
+    { field: 'email', headerName: 'Email', width: 240 },
+    { field: 'status', headerName: 'Status', width: 160 },
+    { field: 'rsvp', headerName: 'RSVP Slots', width: 160 },
+    { field: 'date', headerName: 'Event Created', width: 160 }
+    // Location field 
+    // Participants
+    // Time of event
   ];
 
+  const getStatusColor = (status) => {
+    const colors = {
+      'Active': 'bg-green-100 text-green-800',
+      'Pending': 'bg-yellow-100 text-yellow-800',
+      'Completed': 'bg-blue-100 text-blue-800',
+      'Cancelled': 'bg-red-100 text-red-800',
+      'On Hold': 'bg-gray-100 text-gray-800'
+    };
+    return colors[status] || '';
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Open/Close Logic */}
-      <aside className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform duration-300 ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-64'
-      }`}>
-
-        {/* Brand Name */}
-        <div className="h-full bg-red-800">
-          <div className="p-4 bg-red-900 flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold text-white">GoRSVP</h1>
-              <p className="text-red-100">Admin Dashboard</p>
-            </div>
-
-            {/* Close Button */}
-            <button 
-              onClick={() => setSidebarOpen(false)}
-              className="text-white p-2 hover:bg-red-700 rounded-lg"
-            >
-              <X className="w-6 h-6" />
-            </button>
+    <>
+    <div className='p-1 mx-6'>
+        <div className='flex items-center justify-between'>
+          <div className='flex gap-4 items-center justify-between'>
+              <div className='main-logo flex items-center'>
+                <img src="./MainLogo.png" alt="" className='h-[50px]'/>
+                <Link className='text-xl font-bold ml-2 text-secondary' href="/">GoRSVP</Link>
+              </div>     
           </div>
-          
-          {/* Render NavItems */}
-          <nav className="mt-4">
-            {navItems.map((item, index) => (
-              <a
-                key={index}
-                href={`/${item.label}`}
-                className={`flex items-center px-4 py-3 text-red-100 hover:bg-red-700 ${
-                  item.active ? 'bg-red-600' : ''
-                }`}
-              >
-                {item.icon}
-                <span className="ml-3">{item.label}</span>
-              </a>
-            ))}
-          </nav>
+          <div className='flex gap-10'>
+            <Link className='hover:underline text-secondary' href='./admin-dashboard'>{navItems[0].label}</Link>
+            <Link className='hover:underline text-secondary' href='./admin-users'>{navItems[1].label}</Link>
+            <Link className='hover:underline text-secondary' href='./admin-organizers'>{navItems[2].label}</Link>
+            <Link className='underline text-secondary' href='./admin-events'>{navItems[3].label}</Link>
+          </div>
         </div>
-      </aside>
-      
+    </div>
+    <div className="min-h-screen min-w-full bg-gray-50 p-4">
+      {/* Main Content */}      
+      <div style={{ height: 700, width: '90%', displayflex: 'flex', justifyContent: 'center', margin: 'auto' }}>
+      <DataGrid rows={rows} columns={columns} />
+      </div>
       
     </div>
+    </>
   );
 }
