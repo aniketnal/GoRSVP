@@ -4,27 +4,24 @@
 
   const Navbar = () => {
     return (
-      <div className='p-1 mx-6'>
-        <nav>
-          <ul className='flex gap-4 items-center justify-between'>
+      <div className='bg-foreground mx-32 sticky top-0 z-10'>
+        <div>
+          <div className='flex gap-4 items-center justify-between'>
               <div className='main-logo flex items-center'>
-                <img src="./MainLogo.png" alt="" className='h-[50px]'/>
-                <Link className='text-xl font-bold ml-2 text-secondary' href="/">GoRSVP</Link>
+                <img src="./MainLogo.png" alt="" className='h-[60px]'/>
+                <Link className='text-2xl font-bold ml-2 text-secondary' href="/">GoRSVP</Link>
               </div>
               <div className='searchboxes rounded-md flex gap-3'>
-                <div className=' flex border bg-white border-slate-300 rounded-md'>
-                  <input className='ml-3 border-none focus:outline-none' type="text" placeholder='Search for Events' />
-                  <button className='p-2 rounded-e bg-primary text-white'><Search /></button>
+                <div className=' flex bg-foreground border-2 border-secondary rounded-full'>
+                  <button className='p-2 border-2 rounded-full bg-secondary text-footertext'><Search /></button>
+                  <input className=' text-primary ml-3 rounded-full border-none focus:outline-none bg-inherit' type="text" placeholder='Search for Events' />
                 </div>
-                <button className="bg-transparent hover:bg-primary text-primary font-semibold hover:text-white py-2 px-4 border border-secondary hover:border-transparent rounded-full">
+                <button className="bg-transparent hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
                 <Link href="/signin">Sign In</Link>
                 </button>
-                <button className="bg-transparent hover:bg-primary text-primary font-semibold hover:text-white py-2 px-4 border border-secondary hover:border-transparent rounded-full">
-                <Link href="/signup">Sign Up</Link>
-                </button>
               </div>     
-          </ul>
-        </nav>
+          </div>
+        </div>
       </div>
     )
   }

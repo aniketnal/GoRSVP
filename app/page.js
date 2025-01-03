@@ -1,9 +1,11 @@
 import React from 'react'
+import Navbar from '@/components/Navbar'
 
 const page = () => {
   return (
     <>
-      <div className="min-h-screen bg-gray-100">
+    <Navbar/>
+      <div className="min-h-screen">
       {/* Banner Section */}
       <header className="relative w-full max-w-6xl mx-auto p-4">
         <div className="relative w-full h-64 rounded-lg shadow overflow-hidden">

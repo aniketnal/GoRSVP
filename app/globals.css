@@ -4,16 +4,19 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #f2f0e3;
+   
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* --background: #d3cfcf; */
-    /* --foreground: #ededed; */
-    --primary: #A52A2A;   
-    --secondary: #b44632;
-    --footertext: #570f02;
+    /* Main Text color */
+    /* Footer background color */
+    --primary: rgb(22,22,22,1);   
+    /* focused */
+    --secondary: #ff7c4f;
+    /* Footer Text */
+    --footertext: #f2f0e3;
   }
 }
 
