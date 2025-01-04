@@ -33,7 +33,6 @@ export default function RootLayout({ children }) {
         className='bg-foreground'
       >
         {children}
-        <Footer />
       </body>
     </html>
   );

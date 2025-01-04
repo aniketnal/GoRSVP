@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary  py-4 text-footertext">
+    <footer className="bg-primary py-10 text-footertext">
       <div className="container mx-auto text-center">
         <p className="py-8 ">
           <a href="/privacy-policy" className="hover:underline" >Privacy Policy</a>&nbsp;&#x2022;&nbsp;

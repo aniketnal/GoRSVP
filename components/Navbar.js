@@ -1,28 +1,32 @@
   import Link from 'next/link'
   import React from 'react'
-  import { Search } from 'lucide-react';
+  import { Search, LogIn } from 'lucide-react';
 
   const Navbar = () => {
     return (
-      <div className='bg-foreground mx-32 sticky top-0 z-10'>
+      <>
+      <div className='bg-foreground mt-2 font-serif border border-gray-200'>
         <div>
-          <div className='flex gap-4 items-center justify-between'>
+          <div className='flex gap-4 items-center justify-between mx-32'>
               <div className='main-logo flex items-center'>
                 <img src="./MainLogo.png" alt="" className='h-[60px]'/>
-                <Link className='text-2xl font-bold ml-2 text-secondary' href="/">GoRSVP</Link>
+                <Link className='text-[1.5rem] tracking-wide font-medium ml-2 text-secondary' href="/">GoRSVP</Link>
               </div>
-              <div className='searchboxes rounded-md flex gap-3'>
+              <div className='searchboxes rounded-md flex gap-4'>
                 <div className=' flex bg-foreground border-2 border-secondary rounded-full'>
                   <button className='p-2 border-2 rounded-full bg-secondary text-footertext'><Search /></button>
                   <input className=' text-primary ml-3 rounded-full border-none focus:outline-none bg-inherit' type="text" placeholder='Search for Events' />
                 </div>
-                <button className="bg-transparent hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
-                <Link href="/signin">Sign In</Link>
+                <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
+                <Link className='flex' href="/signin">Sign In <LogIn /></Link>
+                
                 </button>
               </div>     
           </div>
         </div>
       </div>
+      
+    </>
     )
   }
 
