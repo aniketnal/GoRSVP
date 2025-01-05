@@ -4,8 +4,8 @@ const page = () => {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="w-full max-w-lg px-8 rounded">
-                <h1 className="text-4xl font-bold mb-4 text-center text-primary">Contact Us</h1>
-                <p className="mb-4 text-lg text-center">We would love to hear from you!<br></br>Please fill out the form below to get in touch with us.</p>
+                <h1 className="text-4xl font-bold mb-4 text-center text-secondary">Contact Us</h1>
+                <p className="mb-4 text-lg text-center text-primary">We would love to hear from you!<br></br>Please fill out the form below to get in touch with us.</p>
                 <form className="space-y-4">
                     <div>
                         <label className="block text-lg font-medium text-primary" htmlFor="name">Name</label>

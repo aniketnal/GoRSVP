@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import Navbar from '@/components/Navbar';
+import PanelNav from '@/components/PanelNav';
 import Link from 'next/link';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
@@ -94,20 +94,8 @@ export default function DashboardLayout() {
   return (
     <>
     <div className='p-1 mx-6'>
-        <div className='flex items-center justify-between'>
-          <div className='flex gap-4 items-center justify-between'>
-              <div className='main-logo flex items-center'>
-                <img src="./MainLogo.png" alt="" className='h-[50px]'/>
-                <Link className='text-xl font-bold ml-2 text-secondary' href="/">GoRSVP</Link>
-              </div>     
-          </div>
-          <div className='flex gap-10'>
-            <Link className='hover:underline text-secondary' href='./admin-dashboard'>{navItems[0].label}</Link>
-            <Link className='hover:underline text-secondary' href='./admin-users'>{navItems[1].label}</Link>
-            <Link className='hover:underline text-secondary' href='./admin-organizers'>{navItems[2].label}</Link>
-            <Link className='underline text-secondary' href='./admin-events'>{navItems[3].label}</Link>
-          </div>
-        </div>
+        <PanelNav />
+        
     </div>
     <div className="min-h-screen min-w-full bg-gray-50 p-4">
       {/* Main Content */}      

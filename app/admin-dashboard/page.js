@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Link from 'next/link';
+import PanelNav from '@/components/PanelNav';
+
 // Rest of your imports
 import { 
   LayoutDashboard, 
@@ -20,32 +20,14 @@ export default function DashboardLayout() {
     { title: "Total RSVP's", value: '200', change: '12.6% from last month', icon: <Ticket className="w-6 h-6 text-red-800" /> }
   ];
 
-  const navItems = [
-    { icon: <LayoutDashboard className="w-5 h-5" />, label: 'admin-dashboard', active: true },
-    { icon: <Users className="w-5 h-5" />, label: 'admin-users' },
-    { icon: <UserCog className="w-5 h-5" />, label: 'admin-organizers' },
-    { icon: <Calendar className="w-5 h-5" />, label: 'admin-events' }
-  ];
+  
 
   return (
     <>
     <div className='p-1 mx-6'>
-        <div className='flex items-center justify-between'>
-          <div className='flex gap-4 items-center justify-between'>
-              <div className='main-logo flex items-center'>
-                <img src="./MainLogo.png" alt="" className='h-[50px]'/>
-                <Link className='text-xl font-bold ml-2 text-secondary' href="/">GoRSVP</Link>
-              </div>     
-          </div>
-          <div className='flex gap-10'>
-            <Link className='underline text-secondary' href='./admin-dashboard'>{navItems[0].label}</Link>
-            <Link className='hover:underline text-secondary' href='./admin-users'>{navItems[1].label}</Link>
-            <Link className='hover:underline text-secondary' href='./admin-organizers'>{navItems[2].label}</Link>
-            <Link className='hover:underline text-secondary' href='./admin-events'>{navItems[3].label}</Link>
-          </div>
-        </div>
+    <PanelNav />
     </div>
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Main Content */}      
         <div className="p-8">
           {/* Render Main Content */}
