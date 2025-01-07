@@ -4,7 +4,7 @@ import { Poppins } from 'next/font/google'
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SessionWrapper from "@/components/SessionWrapper";
- 
+ import AnimatedCursor from "react-animated-cursor"
 const poppins = Poppins({
   weight: '400',
   subsets: ['latin'],
@@ -32,6 +32,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className='bg-foreground'>
         <SessionWrapper>
+        <AnimatedCursor innerSize={8} outerSize={35} innerScale={1} outerScale={2} outerAlpha={0} hasBlendMode={true} innerStyle={{backgroundColor: 'rgb(255, 124, 79)',}} outerStyle={{border: '2px solid rgb(255, 124, 79)',}}/>
           {/* <Navbar /> */}
           {children}
           {/* <Footer /> */}

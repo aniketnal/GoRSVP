@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Zap } from 'lucide-react';
-import AnimatedCursor from "react-animated-cursor"
+
 
 
 const testimonials = [
@@ -45,20 +45,6 @@ const Page = () => {
   return (
 
     <>
-    <AnimatedCursor
-      innerSize={8}
-      outerSize={35}
-      innerScale={1}
-      outerScale={2}
-      outerAlpha={0}
-      hasBlendMode={true}
-      innerStyle={{
-        backgroundColor: 'rgb(255, 124, 79)',
-      }}
-      outerStyle={{
-        border: '2px solid rgb(255, 124, 79)',
-      }}
-    />
 
     <div className="min-h-screen bg-[#f2f0e3] ">
       <Navbar />
