@@ -46,11 +46,11 @@ const Page = () => {
   return (
     <>
       <div className="min-h-screen bg-[#f2f0e3] ">
-        <Navbar />
+        <Navbar/>
         <div className="max-w-6xl mx-auto px-4 text-center mt-40 tracking-widest">
-          <h1 className="text-2xl font-serif  text-[rgb(22,22,22)]">
+          <div className="text-4xl font-serif  text-[rgb(22,22,22)]">
             <div style={{color: textColor}} className="flex justify-center items-center">
-              <div className="text-primary text-5xl">Need to</div> &nbsp;
+              <div className="text-primary text-7xl">Need to</div> &nbsp;
               <TypeAnimation
                 preRenderFirstString={true}
                 sequence={[
@@ -60,25 +60,24 @@ const Page = () => {
                   "Manage Events?",
                   1000,
                   "Host Events?",
-                  1000,
-                  "Join GoRSVP!",
-                  500,
+                  1000
                 ]}
                 speed={50}
                 style={{ fontSize: "2em" }}
                 repeat={Infinity}
               />
             </div>
-          </h1>
+            <div className="text-6xl mt-4">Join <span className="text-secondary italic">GoRSVP</span></div>
+          </div>
 
-          <p className="mt-8 text-2xl text-[rgb(22,22,22)] opacity-80 max-w-3xl mx-auto">
+          <p className="mt-12 text-2xl text-[rgb(22,22,22)] opacity-80 max-w-3xl mx-auto">
             Discover, plan, and experience extraordinary moments, all in one
             place
             <br />
             Where moments become memories, effortlessly.
           </p>
         </div>
-        <div className="border-b-2 border-transparent mt-36 mb-20 text-secondary text-center flex justify-center items-center animate-bounce-fast">
+        <div className="border-b-2 border-transparent mt-36 mb-32 text-secondary text-center flex justify-center items-center animate-bounce-fast">
           <ArrowDownToLine className="w-20 h-20 " />
         </div>
         {/* Categories Section */}
