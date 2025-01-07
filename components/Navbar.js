@@ -6,12 +6,6 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const { data: session } = useSession();
-  if(session) {
-    return <>
-      Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
-    </>
-  }
   return (
     <>
       <div className="bg-foreground mt-2 font-serif border border-gray-200">
@@ -37,11 +31,12 @@ const Navbar = () => {
                   placeholder="Search for Events"
                 />
               </div>
-              <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
-                <Link className="flex" href="/signin">
-                  Sign In <LogIn />
-                </Link>
-              </button>
+              {session && <button onClick={()=>{signOut()}} className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">Sign Out<LogIn />
+              </button>}
+              {/* session && then stuff to show while logged in */}
+              {!session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
+                <Link className="flex" href="/signin">Sign In <LogIn /></Link>
+              </button>}
             </div>
           </div>
         </div>
