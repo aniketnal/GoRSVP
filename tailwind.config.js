@@ -14,6 +14,9 @@ module.exports = {
         secondary: "var(--secondary)",
         footertext: "var(--footertext)",
       },
+      animation: {
+        'bounce-fast': 'bounce 0.69s infinite',
+      },
     },
   },
   plugins: [],

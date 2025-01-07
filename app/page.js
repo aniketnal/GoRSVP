@@ -2,7 +2,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Zap } from 'lucide-react';
+import { Zap, ArrowDownToLine } from 'lucide-react';
 
 
 
@@ -62,7 +62,9 @@ const Page = () => {
         </p>
       </div>
 
-      <div className="border-b-2 border-gray-200 mt-36 mb-20"></div>
+      <div className="border-b-2 border-transparent mt-36 mb-20 text-secondary text-center flex justify-center items-center animate-bounce-fast">
+      <ArrowDownToLine className="w-20 h-20 "/>
+       </div>
       {/* Categories Section */}
      
       <nav className="flex flex-col justify-center items-center mx-auto w-fit gap-6 mt-10 sm:grid-cols-6 mb-16 text-center ">

@@ -8,7 +8,7 @@ const Navbar = () => {
   const { data: session } = useSession();
   return (
     <>
-      <div className="bg-foreground mt-2 font-serif border border-gray-200">
+      <div className="bg-foreground mt-2 font-serif border-b shadow-sm border-secondary top-0 sticky z-50">
         <div>
           <div className="flex gap-4 items-center justify-between mx-32">
             <div className="main-logo flex items-center">
