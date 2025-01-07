@@ -3,8 +3,15 @@ import Navbar from "@/components/Navbar";
 import React from "react";
 import { Github } from 'lucide-react';
 import { useSession, signIn, signOut } from "next-auth/react"
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 const page = () => {
+  const { data: session } = useSession();
+
+  if(session){
+    const router = useRouter();
+    router.push("/");
+  }
   return (
     <>
     <Navbar />
