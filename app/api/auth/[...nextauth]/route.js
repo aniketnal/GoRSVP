@@ -13,29 +13,21 @@ export const authoptions = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      //THE LINE BELOW BREAKS THE CODE.
-      // authorization: {
-      //   params: {
-      //     prompt: "consent",
-      //     access_type: "offline",
-      //     response_type: "code"
-      //   }}
     }),
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      if (account.provider == "github") {
+      if (account.provider == "github" || account.provider == "google") {
         await connectDB()
         //check if user exists
-        //NOT GETTING EMAIL FROM GITHUB, hence can't compare and do rest operations
-        const currentUser =  await User.findOne({ email: email });
+        const currentUser =  await User.findOne({ email: user.email });
         console.log(currentUser);
-        if (!currentUser) {
-          //create user
+        if (currentUser == null) {
           const newUser = new User({
             email: user.email,
-            username: email.split("@")[0],
+            name: user.name,
           })
+          await newUser.save();
         }
         return true;
       }
@@ -43,8 +35,7 @@ export const authoptions = NextAuth({
     },
     async session({ session, user, token }) {
       const dbUser = await User.findOne({ email: session.user.email });
-      console.log(dbUser);
-      session.user.name = dbUser.username;
+      session.user.name = dbUser.name;
       return session;
     },
   },

@@ -33,6 +33,8 @@ const Navbar = () => {
               </div>
               {session && <button onClick={()=>{signOut()}} className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">Sign Out<LogIn />
               </button>}
+              {/* shall be a dashboard / Profile Drop down */}
+              {session && <p className="text-black"> Signed in as {session.user.name}</p>}
               {/* session && then stuff to show while logged in */}
               {!session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
                 <Link className="flex" href="/signin">Sign In <LogIn /></Link>
