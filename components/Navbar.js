@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Search, LogIn } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { Plus, User } from 'lucide-react';
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -20,7 +21,7 @@ const Navbar = () => {
                 GoRSVP
               </Link>
             </div>
-            <div className="searchboxes rounded-md flex gap-4">
+            <div className="searchboxes rounded-md flex gap-4 items-center">
               <div className=" flex bg-foreground border-2 border-secondary rounded-full">
                 <button className="p-2 border-2 rounded-full bg-secondary text-footertext">
                   <Search />
@@ -31,10 +32,21 @@ const Navbar = () => {
                   placeholder="Search for Events"
                 />
               </div>
-              {session && <button onClick={()=>{signOut()}} className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">Sign Out<LogIn />
+              {session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
+                <Link className="flex" href="/createevent"><Plus/>Create Event</Link>
               </button>}
+              {session && 
+              <div className="flex text-primary">
+                <User/>
+                <select name="" id="" className="bg-transparent border-none focus:outline-none">
+                  <option className="hidden" value="">{session && `Welcome, ${session.user.name}` }</option>
+                  <option value="Profile">Profile</option>
+                  <option value="My Events">My Events</option>
+                  <option value="My Events">My Events</option>
+                  <option value="Sign Out">Sign Out</option>
+                </select>
+              </div>}
               {/* shall be a dashboard / Profile Drop down */}
-              {session && <p className="text-black"> Signed in as {session.user.name}</p>}
               {/* session && then stuff to show while logged in */}
               {!session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
                 <Link className="flex" href="/signin">Sign In <LogIn /></Link>
