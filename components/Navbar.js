@@ -1,4 +1,4 @@
-"user client"
+"use client"
 import Link from "next/link";
 import React from "react";
 import { Search, LogIn } from "lucide-react";
@@ -35,6 +35,7 @@ const Navbar = () => {
               {session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
                 <Link className="flex" href="/createevent"><Plus/>Create Event</Link>
               </button>}
+              {/* shall be a dashboard / Profile Drop down */}
               {session && 
               <div className="flex text-primary">
                 <User/>
@@ -42,11 +43,10 @@ const Navbar = () => {
                   <option className="hidden" value="">{session && `Welcome, ${session.user.name}` }</option>
                   <option value="Profile">Profile</option>
                   <option value="My Events">My Events</option>
-                  <option value="My Events">My Events</option>
-                  <option value="Sign Out">Sign Out</option>
+                  <option value="My RSVP">My RSVPs</option>
+                  <option onClick={()=>{signOut()}}>Sign Out</option>
                 </select>
               </div>}
-              {/* shall be a dashboard / Profile Drop down */}
               {/* session && then stuff to show while logged in */}
               {!session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
                 <Link className="flex" href="/signin">Sign In <LogIn /></Link>

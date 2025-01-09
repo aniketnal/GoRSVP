@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Zap, ArrowDownToLine } from "lucide-react";
 import { TypeAnimation } from 'react-type-animation';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const testimonials = [
   {
@@ -43,11 +43,7 @@ const testimonials = [
 
 const Page = () => {
   const [textColor, setTextColor] = useState('#ff7c4f');
-  const [isClient, setIsClient] = useState(false)
- 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+
   return (
     <>
       <div className="min-h-screen bg-[#f2f0e3] ">
