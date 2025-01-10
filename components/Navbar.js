@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import Link from "next/link";
 import React from "react";
 import { Search, LogIn } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Plus, User } from 'lucide-react';
+import { Plus, User } from "lucide-react";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -32,25 +32,51 @@ const Navbar = () => {
                   placeholder="Search for Events"
                 />
               </div>
-              {session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
-                <Link className="flex" href="/createevent"><Plus/>Create Event</Link>
-              </button>}
+              {session && (
+                <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
+                  <Link className="flex" href="/createevent">
+                    <Plus />
+                    Create Event
+                  </Link>
+                </button>
+              )}
               {/* shall be a dashboard / Profile Drop down */}
-              {session && 
-              <div className="flex text-primary">
-                <img src={session.user.image} alt="profilepicture" className="h-10 w-10 rounded-full mr-1" />
-                <select name="" id="" className="bg-transparent border-none focus:outline-none">
-                  <option className="hidden text-secondary" value=""> Hi, {session.user.name}</option>
-                  <option value="Profile">Profile</option>
-                  <option value="My Events">My Events</option>
-                  <option value="My RSVP">My RSVPs</option>
-                  <option onClick={()=>{signOut()}}>Sign Out</option>
-                </select>
-              </div>}
+              {session && (
+                <div className="flex text-primary">
+                  <img
+                    src={session.user.image}
+                    alt="profilepicture"
+                    className="h-10 w-10 rounded-full mr-1"
+                  />
+                  <select
+                    name=""
+                    id=""
+                    className="bg-transparent border-none focus:outline-none"
+                  >
+                    <option className="hidden text-secondary" value="">
+                      {" "}
+                      Hi, {session.user.name}
+                    </option>
+                    <option value="Profile">Profile</option>
+                    <option value="My RSVP">My RSVPs</option>
+                    <option
+                      onClick={() => {
+                        signOut();
+                      }}
+                    >
+                      Sign Out
+                    </option>
+                  </select>
+                </div>
+              )}
               {/* session && then stuff to show while logged in */}
-              {!session && <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
-                <Link className="flex" href="/signin">Sign In <LogIn /></Link>
-              </button>}
+              {!session && (
+                <Link href="/signin">
+                  <p className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
+                    Sign In <LogIn />
+                  </p>
+                </Link>
+              )}
             </div>
           </div>
         </div>
