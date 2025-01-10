@@ -26,6 +26,7 @@ export const authoptions = NextAuth({
           const newUser = new User({
             email: user.email,
             name: user.name,
+            image: user.image,
           })
           await newUser.save();
         }
@@ -35,7 +36,9 @@ export const authoptions = NextAuth({
     },
     async session({ session, user, token }) {
       const dbUser = await User.findOne({ email: session.user.email });
-      session.user.name = dbUser.name;
+      session.user.name = dbUser.name.split(' ')[0];;
+      session.user.image = dbUser.image;
+      session.user.organizer = dbUser.isOrganizer;
       return session;
     },
   },

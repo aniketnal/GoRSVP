@@ -38,9 +38,9 @@ const Navbar = () => {
               {/* shall be a dashboard / Profile Drop down */}
               {session && 
               <div className="flex text-primary">
-                <User/>
+                <img src={session.user.image} alt="profilepicture" className="h-10 w-10 rounded-full mr-1" />
                 <select name="" id="" className="bg-transparent border-none focus:outline-none">
-                  <option className="hidden" value="">{session && `Welcome, ${session.user.name}` }</option>
+                  <option className="hidden text-secondary" value=""> Hi, {session.user.name}</option>
                   <option value="Profile">Profile</option>
                   <option value="My Events">My Events</option>
                   <option value="My RSVP">My RSVPs</option>
