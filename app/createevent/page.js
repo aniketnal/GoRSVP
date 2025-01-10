@@ -1,6 +1,30 @@
-import React from "react";
+"use client"
+import React, { useEffect }  from "react";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { becomeorganizer } from "@/actions/useractions";
 
 const page = () => {
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    async function orgconvertor() {
+      if(session.user.organizer == false){
+        try {
+              const response = await becomeorganizer(session.user);
+              if (response.ok) {
+                alert("You are now also an organizer"); 
+              } else {
+                alert("Tumse na ho payega");
+              }
+            } catch (error) {
+              console.error("Error making you organizer", error);
+              alert("Please try again later");
+            }
+      }
+    }
+    orgconvertor();
+  }, [session,status]); //even if array is empty, runs twice. might be strict mode issue.
+
   return (
     <div className="bg-gray-100 flex justify-center items-center min-h-screen">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-3xl">

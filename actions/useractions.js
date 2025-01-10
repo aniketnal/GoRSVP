@@ -18,3 +18,16 @@ export const savecontact = async (msg) => {
     await newcontact.save(); 
     return { ok: true };
 }
+
+//updates isOrganizer field in User model for current user.
+export const becomeorganizer = async (msg) => {
+    await connectDB();
+    const user = await User.findOne({ email: msg.email });
+    if (user) {await User.updateOne({ email: msg.email }, { isOrganizer: true });
+        return { ok: true };
+    }
+    else{
+        return { ok: false, error: "email not found in record" };
+    }
+    
+}
