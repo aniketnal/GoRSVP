@@ -53,6 +53,12 @@ export const saveevent = async (msg) => {
 //fetches all events from Event model.
 export const getallevents = async (msg) => {
     await connectDB();
-    const events = await Event.find({});
-    return { ok: true, events: events };
+    const events = await Event.find({}).lean();
+    const plainEvents = events.map(event => ({
+        ...event,
+        _id: event._id.toString(),
+        eventDate: event.eventDate.toISOString(),
+        createdAt: event.createdAt.toISOString(),
+      }));
+    return {events: plainEvents };
 }

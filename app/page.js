@@ -1,36 +1,55 @@
 "use client";
 import React from "react";
 import { Zap, ArrowDownToLine } from "lucide-react";
-import { TypeAnimation } from 'react-type-animation';
-import { useState } from "react";
+import { TypeAnimation } from "react-type-animation";
+import { useState, useEffect } from "react";
+import { getallevents } from "@/actions/useractions";
 
 const Page = () => {
-  const [textColor, setTextColor] = useState('#ff7c4f');
+  const [textColor, setTextColor] = useState("#ff7c4f");
+  const [events, setEvents] = useState([]);
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const data = await getallevents();
+        console.log(data.events);
+        setEvents(data.events);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+    fetchEvents();
+  }, []);
   return (
     <>
       <div className="min-h-screen bg-[#f2f0e3] ">
         <div className="max-w-6xl mx-auto px-4 text-center mt-40 tracking-widest">
           <div className="text-4xl font-serif  text-[rgb(22,22,22)]">
-            <div style={{color: textColor}} className="flex justify-center items-center">
+            <div
+              style={{ color: textColor }}
+              className="flex justify-center items-center"
+            >
               <div className="text-primary text-7xl">Need to</div> &nbsp;
               <TypeAnimation
                 preRenderFirstString={true}
                 sequence={[
                   500,
-                  "Organize Events?", 
+                  "Organize Events?",
                   1000,
                   "Manage Events?",
                   1000,
                   "Host Events?",
-                  1000
+                  1000,
                 ]}
                 speed={50}
                 style={{ fontSize: "2em" }}
                 cursor={false}
               />
             </div>
-            <div className="text-6xl mt-4">Join <span className="text-secondary italic">GoRSVP</span></div>
+            <div className="text-6xl mt-4">
+              Join <span className="text-secondary italic">GoRSVP</span>
+            </div>
           </div>
 
           <p className="mt-12 text-2xl text-[rgb(22,22,22)] opacity-80 max-w-3xl mx-auto">
@@ -72,23 +91,25 @@ const Page = () => {
             Top Picks for you
           </h1>
           <div className="flex justify-center items-center md:grid-cols-3 gap-10  flex-wrap">
-            {[1, 2, 3, 4, 5, 6].map((id) => (
+            {events.map((e) => (
               <div
-                key={id}
+                key={e.Timestamp}
                 className="p-6 rounded-lg shadow-md hover:shadow-xl"
               >
                 <img
                   className="border rounded-lg"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmBrquyUzcPbpRlxCIDTS6WFJ6IMlUGmqbgA&s"
+                  src={e.eventBanner}
+                  alt={e.eventTitle}
                 />
                 <h3 className="text-md font-semibold text-gray-800 mt-6">
-                  Rhythm & Beats: Kasukabe Events
+                  {e.eventTitle}
                 </h3>
                 <p className="text-md text-black mt-2">
-                  A night of electrifying Music!
+                  {e.eventDescription}
                 </p>
                 <span className="text-md text-gray-500 mt-2 block">
-                  Dec 20, 2024 | Venue: Dhakkan Curry
+                  {new Date(e.eventDate).toLocaleDateString()} | Venue:{" "}
+                  {e.eventLocation}
                 </span>
                 <div className="flex justify-end mt-4">
                   <button className="flex items-center justify-center py-2 gap-2 rounded-full border border-secondary bg-foreground text-secondary hover:bg-secondary hover:text-footertext px-2">
