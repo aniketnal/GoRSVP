@@ -11,6 +11,7 @@ const eventSchema = new Schema({
     eventCapacity: {type: Number, required: true},
     eventBanner: {type: String, required: true},
     eventDescription: {type: String, required: true},
+    Timestamp: {type: Number, default: Date.now},
     createdAt: {type: Date, default: Date.now},
 });
 

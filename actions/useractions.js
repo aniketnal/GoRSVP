@@ -49,3 +49,10 @@ export const saveevent = async (msg) => {
     await newevent.save(); 
     return { ok: true };
 }
+
+//fetches all events from Event model.
+export const getallevents = async (msg) => {
+    await connectDB();
+    const events = await Event.find({});
+    return { ok: true, events: events };
+}
