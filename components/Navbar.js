@@ -7,6 +7,18 @@ import { Plus, User } from "lucide-react";
 
 const Navbar = () => {
   const { data: session } = useSession();
+
+  const handleSelectChange = (e) => {
+    const selectedOption = e.target.value;
+    switch (selectedOption) {
+      case "Profile":
+        window.location.replace(`/profile/${encodeURIComponent(session.user.email)}`);
+        break;
+        //similar cases corresponding to value for other options
+      default:
+        break;
+    }
+  };
   return (
     <>
       <div className="bg-foreground mt-2 font-serif border-b shadow-sm border-secondary top-0 sticky z-50">
@@ -41,6 +53,7 @@ const Navbar = () => {
                 </button>
               )}
               {/* shall be a dashboard / Profile Drop down */}
+              
               {session && (
                 <div className="flex text-primary">
                   <img
@@ -50,8 +63,9 @@ const Navbar = () => {
                   />
                   {/* select menu starts */}
                   <select
-                    name=""
-                    id=""
+                    name="userOptions"
+                    id="userOptions"
+                    onChange={handleSelectChange}
                     className="bg-transparent border-none focus:outline-none"
                   >
                     <option className="hidden text-secondary" value="">
@@ -59,13 +73,10 @@ const Navbar = () => {
                       Hi, {session.user.name}
                     </option>
                     <option value="Profile">Profile</option>
-                    <option value="My RSVP">My RSVPs</option>
-                    {session.user.organizer && <option value="Events">My Events</option>}
+                    <option value="MyRSVP">My RSVPs</option>
+                    {session.user.organizer && <option value="MyEvents">My Events</option>}
                     <option
-                      onClick={() => {
-                        signOut();
-                      }}
-                    >
+                      onClick={() => {signOut();}}>
                       Sign Out
                     </option>
                   </select>
