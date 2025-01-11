@@ -102,7 +102,7 @@ const Page = () => {
               >
                 <img
                   src={e.eventBanner}
-                  className="border rounded-lg text-primary h-40"
+                  className="border rounded-lg text-primary h-44 w-80"
                   alt="eventBanner"       
                 />
                 <h3 className="text-md font-semibold text-gray-800 mt-6">
@@ -116,7 +116,7 @@ const Page = () => {
                 <div className="flex justify-end mt-4">
            
                   <button onClick={()=>{handleButtonClick(e.Timestamp)}} className="flex items-center justify-center py-2 gap-2 rounded-full border border-secondary bg-foreground text-secondary hover:bg-secondary hover:text-footertext px-2">
-                    <Zap /> Ye wala button dabao
+                    <Zap /> Know More
                   </button>
                 </div>
               </div>
