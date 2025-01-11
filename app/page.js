@@ -8,7 +8,7 @@ import { getallevents } from "@/actions/useractions";
 const Page = () => {
   const [textColor, setTextColor] = useState("#ff7c4f");
   const [events, setEvents] = useState([]);
-
+  
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -21,6 +21,10 @@ const Page = () => {
     };
     fetchEvents();
   }, []);
+
+  const handleButtonClick = (timestamp) => {
+    window.location.replace(`/event/${timestamp}`);
+  };
   return (
     <>
       <div className="min-h-screen bg-[#f2f0e3] ">
@@ -97,23 +101,22 @@ const Page = () => {
                 className="p-6 rounded-lg shadow-md hover:shadow-xl"
               >
                 <img
-                  className="border rounded-lg"
                   src={e.eventBanner}
-                  alt={e.eventTitle}
+                  className="border rounded-lg text-primary h-40"
+                  alt="eventBanner"       
                 />
                 <h3 className="text-md font-semibold text-gray-800 mt-6">
                   {e.eventTitle}
                 </h3>
-                <p className="text-md text-black mt-2">
-                  {e.eventDescription}
-                </p>
+                <p className="text-md text-black mt-2">{e.eventDescription}</p>
                 <span className="text-md text-gray-500 mt-2 block">
                   {new Date(e.eventDate).toLocaleDateString()} | Venue:{" "}
                   {e.eventLocation}
                 </span>
                 <div className="flex justify-end mt-4">
-                  <button className="flex items-center justify-center py-2 gap-2 rounded-full border border-secondary bg-foreground text-secondary hover:bg-secondary hover:text-footertext px-2">
-                    <Zap />
+           
+                  <button onClick={()=>{handleButtonClick(e.Timestamp)}} className="flex items-center justify-center py-2 gap-2 rounded-full border border-secondary bg-foreground text-secondary hover:bg-secondary hover:text-footertext px-2">
+                    <Zap /> Ye wala button dabao
                   </button>
                 </div>
               </div>
