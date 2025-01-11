@@ -2,7 +2,6 @@
 import React, {useEffect} from 'react'
 import { useParams } from 'next/navigation';
 import { useSession, signIn, signOut } from "next-auth/react"
-import Navbar from '@/components/Navbar';
 
 const page = () => {
   const { data: session, status } = useSession();
@@ -26,7 +25,6 @@ const page = () => {
   return (
     <>
     {/* Change the page from here. available components - session.user.email, session.user.Name, session.user.image */}
-    <Navbar />
         <div className='text-primary'>
 
         Profile Page of {useremail}

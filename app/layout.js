@@ -33,9 +33,9 @@ export default function RootLayout({ children }) {
       <body className='bg-foreground'>
         <SessionWrapper>
         <AnimatedCursor innerSize={8} outerSize={35} innerScale={1} outerScale={2} outerAlpha={0} hasBlendMode={true} innerStyle={{backgroundColor: 'rgb(255, 124, 79)',}} outerStyle={{border: '2px solid rgb(255, 124, 79)',}}/>
-          {/* <Navbar /> */}
+          <Navbar />
           {children}
-          {/* <Footer /> */}
+          <Footer />
         </SessionWrapper>
       </body>
     </html>

@@ -58,7 +58,7 @@ const Navbar = () => {
                 <div className="flex text-primary">
                   <img
                     src={session.user.image}
-                    alt="profilepicture"
+                    alt="pfp"
                     className="h-10 w-10 rounded-full mr-1"
                   />
                   {/* select menu starts */}

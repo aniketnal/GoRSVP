@@ -1,5 +1,5 @@
 "use client"
-import Navbar from "@/components/Navbar";
+
 import React from "react";
 import { Github } from 'lucide-react';
 import { useSession, signIn, signOut } from "next-auth/react"
@@ -7,8 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 const page = () => {
 
   return (
-    <>
-    <Navbar />
+    <>    
     <div className="flex items-center justify-center min-h-screen bg-foreground">
       <div className="w-full max-w-sm bg-[rgb(249,248,240)]  p-6 rounded-md shadow-xl">
         <h2 className="text-4xl font-bold text-center text-secondary">

@@ -1,45 +1,8 @@
 "use client";
 import React from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Zap, ArrowDownToLine } from "lucide-react";
 import { TypeAnimation } from 'react-type-animation';
 import { useState } from "react";
-
-const testimonials = [
-  {
-    name: "Stanley Taber",
-    role: "Director at Lorem Ipsum",
-    quote:
-      "Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta.",
-    image:
-      "https://cdn.dribbble.com/users/304574/screenshots/6222816/male-user-placeholder.png",
-  },
-  {
-    name: "Ruveyda Crutzen",
-    role: "Project Manager at Lorem Ipsum",
-    quote:
-      "Donec facilisis tortor ut augue lacinia, at viverra est semper. Sed sapien metus, scelerisque nec pharetra id, tempor a tortor.",
-    image:
-      "https://cdn.dribbble.com/users/304574/screenshots/6222816/male-user-placeholder.png",
-  },
-  {
-    name: "Sophie Lambert",
-    role: "CEO at Lorem Ipsum Dolor",
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium pretium tempor. Ut eget imperdiet neque. In volutpat ante semper diam molestie.",
-    image:
-      "https://cdn.dribbble.com/users/304574/screenshots/6222816/male-user-placeholder.png",
-  },
-  {
-    name: "Robert S. McCully",
-    role: "Employee at Lorem Ipsum",
-    quote:
-      "Ut porta viverra est, ut dignissim elit elementum ut. Nunc vel rhoncus nibh, ut tincidunt turpis. Integer ac enim pellentesque, adipiscing metus id.",
-    image:
-      "https://cdn.dribbble.com/users/304574/screenshots/6222816/male-user-placeholder.png",
-  },
-];
 
 const Page = () => {
   const [textColor, setTextColor] = useState('#ff7c4f');
@@ -47,7 +10,6 @@ const Page = () => {
   return (
     <>
       <div className="min-h-screen bg-[#f2f0e3] ">
-        <Navbar/>
         <div className="max-w-6xl mx-auto px-4 text-center mt-40 tracking-widest">
           <div className="text-4xl font-serif  text-[rgb(22,22,22)]">
             <div style={{color: textColor}} className="flex justify-center items-center">
@@ -137,47 +99,6 @@ const Page = () => {
             ))}
           </div>
         </div>
-        <div className="border-b-2 border-gray-200 mt-10"></div>
-        // Testimonials Section
-        <div className="bg-foregorund min-h-screen w-full">
-          <div className="max-w-6xl mx-auto px-4 py-16">
-            <h2 className="text-4xl font-bold text-center mb-16 text-[#1a1a1a]">
-              See what <span className="font-serif italic">our members</span>{" "}
-              are saying.
-            </h2>
-
-            <div className="flex flex-wrap gap-x-16 gap-y-12">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="flex-1 basis-[calc(50%-2rem)] min-w-[300px]"
-                >
-                  <div className="flex items-start gap-4">
-                    <img
-                      src={testimonial.image}
-                      alt={`${testimonial.name}'s profile`}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div className="flex-1">
-                      <p className="text-primary mb-4 leading-relaxed text-lg">
-                        {testimonial.quote}
-                      </p>
-                      <div>
-                        <h3 className="text-secondary font-serif font-medium text-lg">
-                          {testimonial.name}
-                        </h3>
-                        <p className="text-primary text-sm">
-                          {testimonial.role}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <Footer />
       </div>
     </>
   );
