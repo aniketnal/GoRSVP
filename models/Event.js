@@ -4,7 +4,13 @@ const{Schema, model} = mongoose;
 const eventSchema = new Schema({
     organizerEmail: {type: String, required: true},
     organizerName: {type: String},
-    eventName:{type:String, required:true},
+    eventTitle: {type: String, required: true},
+    eventDate: {type: Date, required: true},
+    eventTime: {type: String, required: true},
+    eventLocation: {type: String, required: true},
+    eventCapacity: {type: Number, required: true},
+    eventBanner: {type: String, required: true},
+    eventDescription: {type: String, required: true},
     createdAt: {type: Date, default: Date.now},
 });
 

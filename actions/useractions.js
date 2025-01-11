@@ -31,3 +31,21 @@ export const becomeorganizer = async (msg) => {
     }
     
 }
+
+//event creation form submission, POST req.
+export const saveevent = async (msg) => {
+    await connectDB();
+    const newevent = new Event({
+        organizerEmail: msg.organizerEmail,
+        organizerName: msg.organizerName,
+        eventTitle: msg.eventTitle,
+        eventDate: msg.eventDate,
+        eventTime: msg.eventTime,
+        eventLocation: msg.eventLocation,
+        eventCapacity: msg.eventCapacity,
+        eventBanner: msg.eventBanner,
+        eventDescription: msg.eventDescription,
+    });
+    await newevent.save(); 
+    return { ok: true };
+}

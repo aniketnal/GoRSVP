@@ -48,6 +48,7 @@ const Navbar = () => {
                     alt="profilepicture"
                     className="h-10 w-10 rounded-full mr-1"
                   />
+                  {/* select menu starts */}
                   <select
                     name=""
                     id=""
@@ -59,6 +60,7 @@ const Navbar = () => {
                     </option>
                     <option value="Profile">Profile</option>
                     <option value="My RSVP">My RSVPs</option>
+                    {session.user.organizer && <option value="Events">My Events</option>}
                     <option
                       onClick={() => {
                         signOut();
