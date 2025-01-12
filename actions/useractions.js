@@ -53,7 +53,7 @@ export const saveevent = async (msg) => {
 //fetches all events from Event model.
 export const getallevents = async (msg) => {
     await connectDB();
-    const events = await Event.find({}).lean();
+    const events = await Event.find({isDeleted:false}).lean();
     const plainEvents = events.map(event => ({
         ...event,
         _id: event._id.toString(),
@@ -67,7 +67,7 @@ export const getallevents = async (msg) => {
 export const getevent = async (msg) => {
     await connectDB();
 
-    const event = await Event.findOne({ Timestamp: msg }).lean();
+    const event = await Event.findOne({ Timestamp: msg,isDeleted:false }).lean();
     if (!event) {
         alert('Event not found');
         window.location.replace("/");
@@ -84,8 +84,8 @@ export const getevent = async (msg) => {
 //fetches specific events from Event model.
 export const getusersevent = async (msg) => {
     await connectDB();
-    console.log(msg)
-    const event = await Event.find({ organizerEmail: msg }).lean();
+    // console.log(msg)
+    const event = await Event.find({ organizerEmail: msg, isDeleted:false }).lean();
     if (!event) {
         alert('Event not found');
         window.location.replace("/");
@@ -99,3 +99,17 @@ export const getusersevent = async (msg) => {
       }));
     return { event:plainEvents };
 }
+
+//deletes specific event from Event model.
+export const deleteevent = async (msg) => {
+    await connectDB();
+    const event = await Event.findOne({ Timestamp: msg, isDeleted:false });
+    if (event) {
+        await Event.updateOne({ Timestamp: msg }, { isDeleted: true });
+        return { ok: true };
+      }
+    else{
+        return { ok: false, error: "event not found" };
+    }
+}
+    

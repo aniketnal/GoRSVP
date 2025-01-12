@@ -12,6 +12,7 @@ const eventSchema = new Schema({
     eventBanner: {type: String, required: true},
     eventDescription: {type: String, required: true},
     Timestamp: {type: Number, default: Date.now},
+    isDeleted: {type: Boolean, default: false},
     createdAt: {type: Date, default: Date.now},
 });
 

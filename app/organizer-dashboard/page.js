@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
-import { getusersevent } from "@/actions/useractions";
+import { getusersevent,deleteevent } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 
@@ -9,7 +9,15 @@ const page = () => {
 
   const { data: session, status} = useSession();
   const [events, setEvents] = useState([]);
-  
+  const fetchEvents = async () => {
+    try {
+      const data = await getusersevent(session.user.email);
+      console.log(data.event);
+      setEvents(data.event);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
   useEffect(() => {
     if (status === "loading") return; 
     if (status === "unauthenticated") {
@@ -18,16 +26,6 @@ const page = () => {
     }
 
     if (status === "authenticated" && session) {
-      const fetchEvents = async () => {
-        try {
-          const data = await getusersevent(session.user.email);
-          console.log(data.event);
-          setEvents(data.event);
-        } catch (error) {
-          console.error("Error fetching events:", error);
-        }
-      };
-
       fetchEvents();
     }
   }, [session, status]);
@@ -41,9 +39,17 @@ const page = () => {
   const handleEditClick = (timestamp) => {
     window.location.replace(`/event/${timestamp}`);
   };
-  const handleDeleteClick = (timestamp) => {
-    // window.location.replace(`/event/${timestamp}`);
-    alert("Event Deleted Successfully");
+  const handleDeleteClick = async (timestamp) => {
+    const confirmed = window.confirm("Are you sure you want to delete this event?");
+    if (confirmed) {
+      const result = await deleteevent(timestamp);
+      if (result.ok) {
+        alert("Event Deleted Successfully");
+        fetchEvents();
+      } else {
+        alert("Failed to delete event");
+      }
+    }
   };
   return (
     <div className="min-h-screen bg-foregorund">
