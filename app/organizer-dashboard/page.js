@@ -1,10 +1,9 @@
-import React from "react";
-import Link from "next/link";
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
-import { CalendarCheck } from "lucide-react";
+"use client"
+import React, { useEffect, useState } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 
 const page = () => {
+  //use effect se events aaayenge
   const events = [
     {
       name: "Event 1",
@@ -38,7 +37,7 @@ const page = () => {
     },
   ];
 
-  // issue is when signout is clicked, it should redirect to the landing page but it is not happening
+  // issue is when signout is clicked, it should redirect to the landing page but it is not happening -DEPRECATED (/nav)
   return (
     <div className="min-h-screen bg-foregorund">
       {/* Event Dashboard */}
@@ -51,7 +50,8 @@ const page = () => {
         <PieChart
           series={[
             {
-              data: [
+              //value shall be given by db
+              data: [ 
                 { id: 0, value: 12, label: "Total Events" },
                 { id: 1, value: 150, label: "Total RSVP's" },
                 { id: 2, value: 10, label: "Total Attended" },
@@ -79,6 +79,7 @@ const page = () => {
               <th className="p-4 text-left font-semibold">Actions</th>
             </tr>
           </thead>
+          {/* dynamic rows below */}
           <tbody>
             {events.map((event, index) => (
               <tr
@@ -94,13 +95,13 @@ const page = () => {
                 <td className="p-4 border-t">{event.rsvps}</td>
                 <td className="p-4 border-t">
                   <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
-                    {event.action2}
+                    View
                   </button>
                   <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
-                    {event.action}
+                    Edit
                   </button>
                   <button className="px-3 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
-                    {event.action1}
+                    Delete
                   </button>
                 </td>
               </tr>

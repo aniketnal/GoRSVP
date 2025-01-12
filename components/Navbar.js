@@ -17,6 +17,10 @@ const Navbar = () => {
       case "MyEvents":
         window.location.replace(`/organizer-dashboard`);
         break;
+      case "SignOut":
+        window.location.replace(`/`);
+        signOut();
+        break;
         //similar cases corresponding to value for other options
       default:
         break;
@@ -78,8 +82,7 @@ const Navbar = () => {
                     <option value="Profile">Profile</option>
                     <option value="MyRSVP">My RSVPs</option>
                     {session.user.organizer && <option value="MyEvents" href="./organizer-dashboard">My Events</option>}
-                    <option
-                      onClick={() => {signOut();}}>
+                    <option value="SignOut">
                       Sign Out
                     </option>
                   </select>

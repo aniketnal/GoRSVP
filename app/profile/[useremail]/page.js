@@ -27,8 +27,6 @@ const page = () => {
     {/* Change the page from here. available components - session.user.email, session.user.Name, session.user.image */}
       <div className='text-primary'>
 
-          
-        
         <h2 className="ml-10 mt-10 text-2xl font-bold mb-8">User Profile</h2>
           {/* Main Content */}
         <main className="max-w-4xl p-8 gap-4 flex flex-col mx-auto mb-32 bg-[#f2f0e3] rounded-lg shadow-lg min-h-[53vh]">  
@@ -46,8 +44,8 @@ const page = () => {
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Name</label>
                 <input 
-                  type="text" value={session.user.name}
-                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
+                  type="text" value={session.user.name} //shall be fetched from db.
+                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]" readOnly
                 />
               </div>
               
@@ -55,24 +53,24 @@ const page = () => {
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Email Address</label>
                 <input 
-                  type="email" value={session.user.email}
-                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
+                  type="email" value={session.user.email} //shall be fetched from db.
+                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]" readOnly
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Account Type</label>
                 <input 
-                  type="text" 
-                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
+                  type="text" value={(session.user.Organizer?"Organizer":"User")} //shall be fetched from db. 
+                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]" readOnly
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Account Created</label>
-                <input 
+                <input value = "696969" //shall be fetched from db.
                   type="text" 
-                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
+                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]" readOnly
                 />
               </div>
             </div>
