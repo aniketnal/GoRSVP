@@ -66,9 +66,9 @@ const [eventData, seteventData] = useState({
   };
  
   return (
-    <div className="bg-gray-100 flex justify-center items-center min-h-screen">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-3xl">
-        <h1 className="text-2xl font-semibold text-primary mb-4">Create New Event</h1>
+    <div className="bg-foreground flex justify-center items-center min-h-screen">
+      <div className="bg-[rgb(249,248,240)] p-6 rounded-lg shadow-md w-full max-w-3xl">
+        <h1 className="text-2xl font-semibold text-secondary mb-4">Create New Event</h1>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
@@ -179,13 +179,13 @@ const [eventData, seteventData] = useState({
           <div className="flex justify-between">
             <button
               type="button" onClick={() => window.location.replace("/") }
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
+              className="px-4 py-2 bg-primary  text-footertext rounded-md hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 text-white rounded-md bg-primary shadow-sm focus:shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+              className="px-4 py-2 text-secondary bg-foreground rounded-md  shadow-sm focus:shadow-md hover:bg-secondary hover:text-footertext border-2 border-secondary"
             >
               Create Event
             </button>
