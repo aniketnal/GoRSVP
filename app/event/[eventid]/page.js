@@ -24,7 +24,7 @@ const page = () => {
   }, []);
   return (
     <div className="bg-foreground flex justify-center items-center min-h-screen text-primary">
-      <div className="bg-[rgb(249,248,240)] p-6 rounded-lg shadow-md w-full max-w-3xl mb-6 mt-6">
+      <div className="p-6 rounded-lg border-2 shadow-xl  min-h-[70vh] mb-6 mt-6">
         {/* Event Banner */}
         <img
           src={event.eventBanner}
@@ -33,10 +33,10 @@ const page = () => {
         />
 
         {/* Event Details */}
-        <div className="flex flex-col sm:flex-row gap-6">
+        <div className="flex flex-col sm:flex-row gap-6 mt-16">
           {/* Left Section */}
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold text-center text-gray-800">
+          <div className="flex-1 p-4">
+            <h1 className="text-2xl font-semibold text-start text-gray-800">
               {event.eventTitle}
             </h1>
 
@@ -59,7 +59,7 @@ const page = () => {
           </div>
 
           {/* Right Section */}
-          <div className="w-full sm:w-64 bg-[rgb(249,248,240)] border-2 p-4 rounded-lg shadow-md self-start">
+          <div className="w-full sm:w-64 p-4 rounded-lg shadow-md self-start">
             <h3 className="text-lg font-semibold text-center text-gray-800">
               {event.eventTitle}
             </h3>
