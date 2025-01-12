@@ -126,3 +126,20 @@ export const rsvpevent = async (Timestamp,email) => {
         return { ok: false, error: "event not found" };
     }
 }
+
+//import matching user from User model.
+export const getuser = async (msg) => {
+    await connectDB();
+    const user = await User.findOne({ email: msg }).lean();
+    if (!user) {
+        return { ok: false, error: "user not found" };
+      }
+    else{
+        const plainuser = {
+            ...user,
+            _id: user._id.toString(),
+            createdAt: user.createdAt.toISOString(),
+          };
+        return { user: plainuser, ok: true };
+    }
+}

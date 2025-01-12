@@ -3,11 +3,11 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getevent,rsvpevent } from "@/actions/useractions";
+import { getevent, rsvpevent } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 const page = () => {
-  const { data: session,status } = useSession();
+  const { data: session, status } = useSession();
   const params = useParams();
   const eveid = params.eventid;
   const [event, setEvents] = useState([]);
@@ -22,34 +22,34 @@ const page = () => {
       setLoading(false);
     }
   };
-  let email = '';
+  let email = "";
   let size = 0;
-  useEffect(() => {  
+
+  useEffect(() => {
     fetchEvents();
   }, []);
-  if(status === 'authenticated'){
+  if (status === "authenticated") {
     email = session.user.email;
   }
   const handleRegisterClick = async (Timestamp) => {
     try {
       // console.log(Timestamp,email);
-      const data = await rsvpevent(Timestamp,email);
-      if(data.ok){
-        alert('Slot Reserved Successfully!');
-      }
-      else{
-        alert('Slot Reservation Failed!');
+      const data = await rsvpevent(Timestamp, email);
+      if (data.ok) {
+        alert("Slot Reserved Successfully!");
+      } else {
+        alert("Slot Reservation Failed!");
       }
     } catch (error) {
       console.error("Error fetching events:", error);
     }
-  }
+  };
   const handleuserClick = (email) => {
     window.location.replace(`/profile/${email}`);
-  }
-  if(!loading) size = event.rsvps.length;
+  };
+  if (!loading) size = event.rsvps.length;
   // console.log(size);
-  
+
   return (
     <div className="bg-foreground flex justify-center items-center min-h-screen text-primary">
       <div className="p-6 rounded-lg border-2 shadow-xl  min-h-[70vh] mb-6 mt-6">
@@ -67,11 +67,16 @@ const page = () => {
             <h1 className="text-2xl font-semibold text-start text-gray-800">
               {event.eventTitle}
             </h1>
-            <p className="text-sm font-medium flex items-center my-2" onClick={()=>handleuserClick(event.organizerEmail)}>
+            <p
+              className="text-sm font-medium flex items-center my-2"
+              onClick={() => handleuserClick(event.organizerEmail)}
+            >
               <span className="mr-2">👤</span> {event.organizerName}
             </p>
             <p className="text-sm font-medium text-gray-800 mb-2">
-              <strong>Date and Time:</strong> {new Date(event.eventDate).toLocaleDateString()} at {event.eventTime} hrs.
+              <strong>Date and Time:</strong>{" "}
+              {new Date(event.eventDate).toLocaleDateString()} at{" "}
+              {event.eventTime} hrs.
             </p>
             <p className="text-sm font-medium text-gray-800 mb-6">
               <strong>Location:</strong> {event.eventLocation}
@@ -92,9 +97,17 @@ const page = () => {
             </h3>
 
             <p className="text-sm font-medium text-center text-gray-800 mb-4">
-              Slots: <strong>{size} booked of {event.eventCapacity}</strong>
+              Slots:{" "}
+              <strong>
+                {size} booked of {event.eventCapacity}
+              </strong>
             </p>
-            <button className="px-4 py-2 text-secondary border-2 border-secondary rounded-md bg-foreground shadow-sm focus:shadow-md hover:bg-secondary hover:text-foreground  w-full" onClick={()=>{handleRegisterClick(event.Timestamp)}}>
+            <button
+              className="px-4 py-2 text-secondary border-2 border-secondary rounded-md bg-foreground shadow-sm focus:shadow-md hover:bg-secondary hover:text-foreground  w-full"
+              onClick={() => {
+                handleRegisterClick(event.Timestamp);
+              }}
+            >
               Reserve Slot
             </button>
           </div>
