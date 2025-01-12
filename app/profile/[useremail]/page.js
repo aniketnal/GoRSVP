@@ -44,25 +44,18 @@ const page = () => {
             {/* Form Fields */}
             <div className="flex-1 grid grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">First Name</label>
+                <label className="block text-sm font-medium text-gray-700">Name</label>
                 <input 
-                  type="text" 
+                  type="text" value={session.user.name}
                   className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
                 />
               </div>
               
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Last Name</label>
-                <input 
-                  type="text"
-                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
-                />
-              </div>
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Email Address</label>
                 <input 
-                  type="email"
+                  type="email" value={session.user.email}
                   className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
                 />
               </div>
@@ -70,23 +63,15 @@ const page = () => {
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">Account Type</label>
                 <input 
-                  type="text"
+                  type="text" 
                   className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Change Password</label>
+                <label className="block text-sm font-medium text-gray-700">Account Created</label>
                 <input 
-                  type="password"
-                  className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
-                <input 
-                  type="password"
+                  type="text" 
                   className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]"
                 />
               </div>
