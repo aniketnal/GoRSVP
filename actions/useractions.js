@@ -112,4 +112,17 @@ export const deleteevent = async (msg) => {
         return { ok: false, error: "event not found" };
     }
 }
-    
+
+//append RSVP to rsvps field in Event model.
+export const rsvpevent = async (Timestamp,email) => {
+    await connectDB();
+    // console.log(Timestamp,email);
+    const event = await Event.findOne({ Timestamp: Timestamp, isDeleted:false });
+    if (event) {
+        await Event.updateOne({ Timestamp: Timestamp }, { $push: { rsvps: email } });
+        return { ok: true };
+      }
+    else{
+        return { ok: false, error: "event not found" };
+    }
+}

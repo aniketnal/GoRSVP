@@ -51,6 +51,11 @@ const page = () => {
       }
     }
   };
+  //calculate the sum of rsvp field in events
+  let totalRsvps = 0;
+  events.forEach((event) => {
+    totalRsvps += event.rsvps.length;
+  });
   return (
     <div className="min-h-screen bg-foregorund">
       {/* Event Dashboard */}
@@ -66,7 +71,7 @@ const page = () => {
               //value shall be given by db
               data: [ 
                 { id: 0, value: events.length, label: "Total Events" },
-                { id: 1, value: 150, label: "Total RSVP's" }, //to be thought upon
+                { id: 1, value: totalRsvps, label: "Total RSVP's" }, //to be thought upon
                 { id: 2, value: 10, label: "Total Attended" }, //to be thought upon
               ],
             },
@@ -105,7 +110,7 @@ const page = () => {
                 <td className="p-4 border-t">{new Date(event.eventDate).toLocaleDateString()}</td>
                 <td className="p-4 border-t">{event.eventTime}</td>
                 <td className="p-4 border-t">{event.eventLocation}</td>
-                <td className="p-4 border-t">{event.rsvps}</td>
+                <td className="p-4 border-t">{event.rsvps.length}</td> 
                 <td className="p-4 border-t">
                   <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleViewClick(event.Timestamp)}}>
                     View

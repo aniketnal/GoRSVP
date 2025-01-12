@@ -3,25 +3,53 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getevent } from "@/actions/useractions";
+import { getevent,rsvpevent } from "@/actions/useractions";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const page = () => {
+  const { data: session,status } = useSession();
   const params = useParams();
   const eveid = params.eventid;
   const [event, setEvents] = useState([]);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const data = await getevent(eveid);
-        // console.log(data.event, "event ka data");
-        setEvents(data.event);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
+  const [loading, setLoading] = useState(true);
+  const fetchEvents = async () => {
+    try {
+      const data = await getevent(eveid);
+      setEvents(data.event);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+      setLoading(false);
+    }
+  };
+  let email = '';
+  let size = 0;
+  useEffect(() => {  
     fetchEvents();
   }, []);
+  if(status === 'authenticated'){
+    email = session.user.email;
+  }
+  const handleRegisterClick = async (Timestamp) => {
+    try {
+      // console.log(Timestamp,email);
+      const data = await rsvpevent(Timestamp,email);
+      if(data.ok){
+        alert('Slot Reserved Successfully!');
+      }
+      else{
+        alert('Slot Reservation Failed!');
+      }
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  }
+  const handleuserClick = (email) => {
+    window.location.replace(`/profile/${email}`);
+  }
+  if(!loading) size = event.rsvps.length;
+  // console.log(size);
+  
   return (
     <div className="bg-foreground flex justify-center items-center min-h-screen text-primary">
       <div className="p-6 rounded-lg border-2 shadow-xl  min-h-[70vh] mb-6 mt-6">
@@ -33,14 +61,13 @@ const page = () => {
         />
 
         {/* Event Details */}
-        <div className="flex flex-col sm:flex-row gap-6 mt-16">
+        <div className="flex flex-col sm:flex-row gap-6 mt-4">
           {/* Left Section */}
           <div className="flex-1 p-4">
             <h1 className="text-2xl font-semibold text-start text-gray-800">
               {event.eventTitle}
             </h1>
-
-            <p className="text-sm font-medium flex items-center mb-2">
+            <p className="text-sm font-medium flex items-center my-2" onClick={()=>handleuserClick(event.organizerEmail)}>
               <span className="mr-2">👤</span> {event.organizerName}
             </p>
             <p className="text-sm font-medium text-gray-800 mb-2">
@@ -59,15 +86,15 @@ const page = () => {
           </div>
 
           {/* Right Section */}
-          <div className="w-full sm:w-64 p-4 rounded-lg shadow-md self-start">
+          <div className="w-full sm:w-64 p-4 rounded-lg shadow-md self-start mt-8">
             <h3 className="text-lg font-semibold text-center text-gray-800">
               {event.eventTitle}
             </h3>
 
             <p className="text-sm font-medium text-center text-gray-800 mb-4">
-              Slot: <strong>Only {event.eventCapacity}</strong>
+              Slots: <strong>{size} booked of {event.eventCapacity}</strong>
             </p>
-            <button className="px-4 py-2 text-secondary border-2 border-secondary rounded-md bg-foreground shadow-sm focus:shadow-md hover:bg-secondary hover:text-foreground  w-full">
+            <button className="px-4 py-2 text-secondary border-2 border-secondary rounded-md bg-foreground shadow-sm focus:shadow-md hover:bg-secondary hover:text-foreground  w-full" onClick={()=>{handleRegisterClick(event.Timestamp)}}>
               Reserve Slot
             </button>
           </div>
