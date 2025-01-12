@@ -14,6 +14,9 @@ const Navbar = () => {
       case "Profile":
         window.location.replace(`/profile/${encodeURIComponent(session.user.email)}`);
         break;
+      case "MyEvents":
+        window.location.replace(`/organizer-dashboard`);
+        break;
         //similar cases corresponding to value for other options
       default:
         break;
@@ -74,7 +77,7 @@ const Navbar = () => {
                     </option>
                     <option value="Profile">Profile</option>
                     <option value="MyRSVP">My RSVPs</option>
-                    {session.user.organizer && <option value="MyEvents">My Events</option>}
+                    {session.user.organizer && <option value="MyEvents" href="./organizer-dashboard">My Events</option>}
                     <option
                       onClick={() => {signOut();}}>
                       Sign Out

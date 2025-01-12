@@ -15,7 +15,7 @@ module.exports = {
         footertext: "var(--footertext)",
       },
       animation: {
-        'bounce-fast': 'bounce 0.69s infinite',
+        'bounce-fast': 'bounce 1s ease-in-out 10',
       },
     },
   },

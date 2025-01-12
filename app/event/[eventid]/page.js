@@ -23,8 +23,8 @@ const page = () => {
     fetchEvents();
   }, []);
   return (
-    <div className="bg-gray-100 flex justify-center items-center min-h-screen">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-3xl mb-6 mt-6">
+    <div className="bg-foreground flex justify-center items-center min-h-screen text-primary">
+      <div className="p-6 rounded-lg border-2 shadow-xl  min-h-[70vh] mb-6 mt-6">
         {/* Event Banner */}
         <img
           src={event.eventBanner}
@@ -33,14 +33,14 @@ const page = () => {
         />
 
         {/* Event Details */}
-        <div className="flex flex-col sm:flex-row gap-6">
+        <div className="flex flex-col sm:flex-row gap-6 mt-16">
           {/* Left Section */}
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold text-center text-gray-800">
+          <div className="flex-1 p-4">
+            <h1 className="text-2xl font-semibold text-start text-gray-800">
               {event.eventTitle}
             </h1>
 
-            <p className="text-sm font-medium text-gray-800 flex items-center mb-2">
+            <p className="text-sm font-medium flex items-center mb-2">
               <span className="mr-2">👤</span> {event.organizerName}
             </p>
             <p className="text-sm font-medium text-gray-800 mb-2">
@@ -59,7 +59,7 @@ const page = () => {
           </div>
 
           {/* Right Section */}
-          <div className="w-full sm:w-64 bg-gray-50 p-4 rounded-lg shadow-md self-start">
+          <div className="w-full sm:w-64 p-4 rounded-lg shadow-md self-start">
             <h3 className="text-lg font-semibold text-center text-gray-800">
               {event.eventTitle}
             </h3>
@@ -67,7 +67,7 @@ const page = () => {
             <p className="text-sm font-medium text-center text-gray-800 mb-4">
               Slot: <strong>Only {event.eventCapacity}</strong>
             </p>
-            <button className="px-4 py-2 text-white rounded-md bg-primary shadow-sm focus:shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 w-full">
+            <button className="px-4 py-2 text-secondary border-2 border-secondary rounded-md bg-foreground shadow-sm focus:shadow-md hover:bg-secondary hover:text-foreground  w-full">
               Reserve Slot
             </button>
           </div>

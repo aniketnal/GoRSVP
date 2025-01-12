@@ -27,7 +27,7 @@ const Page = () => {
   };
   return (
     <>
-      <div className="min-h-screen bg-[#f2f0e3] ">
+      <div className="min-h-screen bg-[#f2f0e3]">
         <div className="max-w-6xl mx-auto px-4 text-center mt-40 tracking-widest">
           <div className="text-4xl font-serif  text-[rgb(22,22,22)]">
             <div
@@ -94,7 +94,7 @@ const Page = () => {
           <h1 className="text-start text-2xl mx-auto my-auto font-semibold text-primary mb-4 p-6">
             Top Picks for you
           </h1>
-          <div className="flex justify-center items-center md:grid-cols-3 gap-10  flex-wrap">
+          <div className="flex justify-start items-center md:grid-cols-3 gap-10  flex-wrap">
             {events.map((e) => (
               <div
                 key={e.Timestamp}
