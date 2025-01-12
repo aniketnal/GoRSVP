@@ -27,7 +27,7 @@ const Page = () => {
   };
   return (
     <>
-      <div className="min-h-screen bg-[#f2f0e3] ">
+      <div className="min-h-screen bg-[#f2f0e3]">
         <div className="max-w-6xl mx-auto px-4 text-center mt-40 tracking-widest">
           <div className="text-4xl font-serif  text-[rgb(22,22,22)]">
             <div
