@@ -1,43 +1,50 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
+import { getusersevent } from "@/actions/useractions";
+import { useSession, signIn, signOut } from "next-auth/react";
+
 
 const page = () => {
-  //use effect se events aaayenge
-  const events = [
-    {
-      name: "Event 1",
-      date: "12/12/2021",
-      time: "12:00 PM",
-      location: "Location 1",
-      rsvps: 100,
-      action: "Edit",
-      action1: "Delete",
-      action2: "View",
-    },
-    {
-      name: "Event 2",
-      date: "12/12/2021",
-      time: "12:00 PM",
-      location: "Location 2",
-      rsvps: 200,
-      action: "Edit",
-      action1: "Delete",
-      action2: "View",
-    },
-    {
-      name: "Event 3",
-      date: "12/12/2021",
-      time: "12:00 PM",
-      location: "Location 3",
-      rsvps: 123,
-      action: "Edit",
-      action1: "Delete",
-      action2: "View",
-    },
-  ];
 
-  // issue is when signout is clicked, it should redirect to the landing page but it is not happening -DEPRECATED (/nav)
+  const { data: session, status} = useSession();
+  const [events, setEvents] = useState([]);
+  
+  useEffect(() => {
+    if (status === "loading") return; 
+    if (status === "unauthenticated") {
+      signIn(); 
+      return;
+    }
+
+    if (status === "authenticated" && session) {
+      const fetchEvents = async () => {
+        try {
+          const data = await getusersevent(session.user.email);
+          console.log(data.event);
+          setEvents(data.event);
+        } catch (error) {
+          console.error("Error fetching events:", error);
+        }
+      };
+
+      fetchEvents();
+    }
+  }, [session, status]);
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  const handleViewClick = (timestamp) => {
+    window.location.replace(`/event/${timestamp}`);
+  };
+  const handleEditClick = (timestamp) => {
+    window.location.replace(`/event/${timestamp}`);
+  };
+  const handleDeleteClick = (timestamp) => {
+    // window.location.replace(`/event/${timestamp}`);
+    alert("Event Deleted Successfully");
+  };
   return (
     <div className="min-h-screen bg-foregorund">
       {/* Event Dashboard */}
@@ -52,9 +59,9 @@ const page = () => {
             {
               //value shall be given by db
               data: [ 
-                { id: 0, value: 12, label: "Total Events" },
-                { id: 1, value: 150, label: "Total RSVP's" },
-                { id: 2, value: 10, label: "Total Attended" },
+                { id: 0, value: events.length, label: "Total Events" },
+                { id: 1, value: 150, label: "Total RSVP's" }, //to be thought upon
+                { id: 2, value: 10, label: "Total Attended" }, //to be thought upon
               ],
             },
           ]}
@@ -83,24 +90,24 @@ const page = () => {
           <tbody>
             {events.map((event, index) => (
               <tr
-                key={event.name}
+                key={event.Timestamp}
                 className={
                   index % 2 === 0 ? "bg-foreground" : "bg-[rgb(249,248,240)]"
                 }
               >
-                <td className="p-4 border-t">{event.name}</td>
-                <td className="p-4 border-t">{event.date}</td>
-                <td className="p-4 border-t">{event.time}</td>
-                <td className="p-4 border-t">{event.location}</td>
+                <td className="p-4 border-t">{event.eventTitle}</td>
+                <td className="p-4 border-t">{new Date(event.eventDate).toLocaleDateString()}</td>
+                <td className="p-4 border-t">{event.eventTime}</td>
+                <td className="p-4 border-t">{event.eventLocation}</td>
                 <td className="p-4 border-t">{event.rsvps}</td>
                 <td className="p-4 border-t">
-                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
+                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleViewClick(event.Timestamp)}}>
                     View
                   </button>
-                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
+                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleEditClick(event.Timestamp)}}>
                     Edit
                   </button>
-                  <button className="px-3 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
+                  <button className="px-3 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleDeleteClick(event.Timestamp)}}>
                     Delete
                   </button>
                 </td>

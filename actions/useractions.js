@@ -81,3 +81,21 @@ export const getevent = async (msg) => {
       };
     return { event:plainEvent };
 }
+//fetches specific events from Event model.
+export const getusersevent = async (msg) => {
+    await connectDB();
+    console.log(msg)
+    const event = await Event.find({ organizerEmail: msg }).lean();
+    if (!event) {
+        alert('Event not found');
+        window.location.replace("/");
+      }
+      const plainEvents = event.map(event => ({
+        ...event,
+        _id: event._id.toString(),
+        eventDate: event.eventDate.toISOString(),
+        createdAt: event.createdAt.toISOString(),
+        Timestamp: event.Timestamp.toString(),
+      }));
+    return { event:plainEvents };
+}
