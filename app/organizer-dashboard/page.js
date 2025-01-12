@@ -1,115 +1,114 @@
 import React from "react";
 import Link from "next/link";
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
-import { CalendarCheck } from 'lucide-react';
+import { CalendarCheck } from "lucide-react";
+import { PieChart } from "@mui/x-charts/PieChart";
 
 const page = () => {
-  const generateSampleData = () => {
-    const firstnames = [
-      "James",
-      "Emma",
-      "Michael",
-      "Sophia",
-      "William",
-      "Olivia",
-      "John",
-      "Ava",
-    ];
-
-    const lastnames = [
-      "Smith",
-      "Johnson",
-      "Williams",
-      "Brown",
-      "Jones",
-      "Davis",
-      "Miller",
-      "Wilson",
-    ];
-    const statuses = ["Active", "Pending", "Completed", "Cancelled", "On Hold"];
-    const emails = [
-      // Professional Emails
-      "john.doe@company.com",
-      "sarah.smith@enterprise.co.uk",
-      "michael.brown@corporation.net",
-      "m.johnson@business.org",
-
-      // Gmail Accounts
-      "davidwilson2024@gmail.com",
-      "emily.parker85@gmail.com",
-      "tech.ninja@gmail.com",
-      "professional.coder@gmail.com",
-      "webdev.master@gmail.com",
-    ];
-
-    return Array.from({ length: 100 }, (_, index) => ({
-      id: index + 1,
-      OrgID: `ORD-${Math.floor(10000 + Math.random() * 90000)}`,
-      firstname: firstnames[Math.floor(Math.random() * firstnames.length)],
-      lastname: lastnames[Math.floor(Math.random() * lastnames.length)],
-      status: statuses[Math.floor(Math.random() * statuses.length)],
-      email: emails[Math.floor(Math.random() * emails.length)],
-      events: Math.floor(0 + Math.random() * 100),
-    }));
-  };
-
-  const rows = generateSampleData();
-
-  const columns = [
-    { field: 'OrgID', headerName: 'Organizer id', width: 220 },
-    { field: 'firstname', headerName: 'First Name', width: 220 },
-    { field: 'lastname', headerName: 'Last Name', width: 220 },
-    { field: 'status', headerName: 'Status', width: 220 },
-    { field: 'email', headerName: 'Email', width: 240 },
-    { field: 'events', headerName: 'Events Hosted', width: 220 },
-    
+  const events = [
+    {
+      name: "Event 1",
+      date: "12/12/2021",
+      time: "12:00 PM",
+      location: "Location 1",
+      rsvps: 100,
+      action: "Edit",
+      action1: "Delete",
+      action2: "View",
+    },
+    {
+      name: "Event 2",
+      date: "12/12/2021",
+      time: "12:00 PM",
+      location: "Location 2",
+      rsvps: 200,
+      action: "Edit",
+      action1: "Delete",
+      action2: "View",
+    },
+    {
+      name: "Event 3",
+      date: "12/12/2021",
+      time: "12:00 PM",
+      location: "Location 3",
+      rsvps: 123,
+      action: "Edit",
+      action1: "Delete",
+      action2: "View",
+    },
   ];
 
+  // issue is when signout is clicked, it should redirect to the landing page but it is not happening
   return (
     <div className="min-h-screen bg-foregorund">
       {/* Event Dashboard */}
       <div className="flex justify-between mx-4">
-        <h2 className="text-primary ml-8 text-xl mt-4 font-bold">Organizer's Dashboard</h2>
+        <h2 className="text-primary ml-8 text-xl mt-4 font-bold">
+          Organizer's Dashboard
+        </h2>
       </div>
-      {/* Cards */}
-      <div className="flex justify-center gap-36 mt-8">
-        <div className="bg-[rgb(249,248,240)] p-4 rounded-lg flex shadow-lg w-1/3">
-          <aside> <CalendarCheck className="text-primary" /></aside>
-          <div className="ml-8">
-            <h2 className="text-lg font-semibold text-gray-800 flex items-end">
-              Total Events
-            </h2>
-            <p className="text-lg text-black mt-2">100</p>
-          </div>
-        </div>
-        <div className="bg-[rgb(249,248,240)] p-4 rounded-lg flex shadow-lg w-1/3">
-          <aside> <CalendarCheck className="text-primary" /></aside>
-          <div className="ml-8 flex justify-between w-full items-end">
-            <div>
-              <h2 className="text-lg font-semibold text-gray-800">
-                Total RSVP's
-              </h2>
-              <p className="text-lg text-black mt-2">300</p>
-            </div>
-           <div>
-           <button className="border-2 border-secondary rounded-md  px-2 py-1 hover:bg-secondary hover:text-footertext text-sm bg-foregorund text-secondary mt-auto self-end">
-              view
-            </button>
-           </div>
-          </div>
-        </div>
+      <div className="flex justify-center gap-12 mt-8">
+        <PieChart
+          series={[
+            {
+              data: [
+                { id: 0, value: 12, label: "Total Events" },
+                { id: 1, value: 150, label: "Total RSVP's" },
+                { id: 2, value: 10, label: "Total Attended" },
+              ],
+            },
+          ]}
+          width={500}
+          height={200}
+        />
       </div>
 
       <div className="border-b-2 mt-6"></div>
       {/* Your Events Section */}
-      <div className="min-h-screen bg-foreground min-w-full p-4">
-            {/* Main Content */}      
-            <div className="text-primary text-2xl ml-8 mb-10">My Events</div>
-            <div style={{ height: 600, width: '90%', displayflex: 'flex', justifyContent: 'center', margin: 'auto' }}>
-            <DataGrid className="bg-white" rows={rows} columns={columns} />
-            </div>
-            
+      <div className="flex flex-col justify-center p-4">
+        <div className="text-primary text-2xl ml-8 mb-10">My Events</div>
+
+        <table className="ml-6 w-[96%] border-collapse text-primary bg-white rounded-lg overflow-hidden">
+          <thead>
+            <tr className="bg-[rgb(249,248,240)]">
+              <th className="p-4 text-left font-semibold">Event Name</th>
+              <th className="p-4 text-left font-semibold">Date</th>
+              <th className="p-4 text-left font-semibold">Time</th>
+              <th className="p-4 text-left font-semibold">Location</th>
+              <th className="p-4 text-left font-semibold">RSVP's</th>
+              <th className="p-4 text-left font-semibold">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {events.map((event, index) => (
+              <tr
+                key={event.name}
+                className={
+                  index % 2 === 0 ? "bg-foreground" : "bg-[rgb(249,248,240)]"
+                }
+              >
+                <td className="p-4 border-t">{event.name}</td>
+                <td className="p-4 border-t">{event.date}</td>
+                <td className="p-4 border-t">{event.time}</td>
+                <td className="p-4 border-t">{event.location}</td>
+                <td className="p-4 border-t">{event.rsvps}</td>
+                <td className="p-4 border-t">
+                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
+                    {event.action2}
+                  </button>
+                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
+                    {event.action}
+                  </button>
+                  <button className="px-3 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md">
+                    {event.action1}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+
     </div>
   );
 };
