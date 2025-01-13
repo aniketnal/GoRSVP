@@ -24,6 +24,9 @@ const Navbar = () => {
       case "MyRSVP":
         window.location.replace(`/my-rsvps`);
         break;
+      case "AdminDash":
+        window.location.replace(`/admin-dashboard`);
+        break;
         //similar cases corresponding to value for other options
       default:
         break;
@@ -83,11 +86,10 @@ const Navbar = () => {
                       Hi, {session.user.name}
                     </option>
                     <option value="Profile">Profile</option>
+                    {session.user.admin && <option value="AdminDash">Admin Panel</option>}
                     <option value="MyRSVP">My RSVPs</option>
                     {session.user.organizer && <option value="MyEvents" href="./organizer-dashboard">My Events</option>}
-                    <option value="SignOut">
-                      Sign Out
-                    </option>
+                    <option value="SignOut">Sign Out</option>
                   </select>
                 </div>
               )}
