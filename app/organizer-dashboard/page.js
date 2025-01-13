@@ -71,13 +71,13 @@ const page = () => {
               //value shall be given by db
               data: [ 
                 { id: 0, value: events.length, label: "Total Events" },
-                { id: 1, value: totalRsvps, label: "Total RSVP's" }, //to be thought upon
+                { id: 1, value: totalRsvps, label: "Total RSVP's" }, 
                 { id: 2, value: 10, label: "Total Attended" }, //to be thought upon
               ],
             },
           ]}
-          width={500}
-          height={200}
+          width={700}
+          height={350}
         />
       </div>
 
