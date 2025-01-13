@@ -31,7 +31,7 @@ const page = () => {
       <div className="text-primary">
         <h2 className="ml-10 mt-10 text-2xl font-bold mb-8">User Profile</h2>
         {/* Main Content */}
-        <main className="max-w-4xl p-8 gap-4 flex flex-col mx-auto mb-32 bg-[#f2f0e3] rounded-lg shadow-lg min-h-[53vh]">
+        <main className="max-w-5xl p-8 gap-4 flex flex-col mx-auto mb-32 bg-[#f2f0e3] rounded-lg shadow-lg min-h-[53vh]">
           <h2 className="text-start left-0 text-2xl font-bold mb-8 ">
             Edit Your Profile
           </h2>
