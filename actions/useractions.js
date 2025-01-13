@@ -117,13 +117,21 @@ export const deleteevent = async (msg) => {
 export const rsvpevent = async (Timestamp,email) => {
     await connectDB();
     // console.log(Timestamp,email);
+    let flag = 0;
     const event = await Event.findOne({ Timestamp: Timestamp, isDeleted:false });
-    if (event) {
+    const rsvpold = event.rsvps;
+    console.log(rsvpold)
+    rsvpold.forEach(e => {
+        if(e==email){
+            flag = 1;
+        }
+    });
+    if (event && flag==0) {
         await Event.updateOne({ Timestamp: Timestamp }, { $push: { rsvps: email } });
         return { ok: true };
       }
     else{
-        return { ok: false, error: "event not found" };
+        return { ok: false, error: "Already Registered" };
     }
 }
 

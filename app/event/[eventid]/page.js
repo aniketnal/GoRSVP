@@ -40,7 +40,7 @@ const page = () => {
         alert("Slot Reserved Successfully!");
         setSize(size + 1);
       } else {
-        alert("Slot Reservation Failed!");
+        alert("You Might Have Already Registered for this Event");
       }
     } catch (error) {
       console.error("Error fetching events:", error);
