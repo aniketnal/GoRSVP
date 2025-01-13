@@ -11,6 +11,9 @@ const page = () => {
   const params = useParams();
   const eveid = params.eventid;
   const [event, setEvents] = useState([]);
+  const [size, setSize] = useState(0);
+  const [email, setEmail] = useState("");
+
   const [loading, setLoading] = useState(true);
   const fetchEvents = async () => {
     try {
@@ -21,22 +24,21 @@ const page = () => {
       console.error("Error fetching events:", error);
       setLoading(false);
     }
-  };
-  let email = "";
-  let size = 0;
+  };  
 
   useEffect(() => {
     fetchEvents();
-  }, []);
-  if (status === "authenticated") {
-    email = session.user.email;
-  }
+    if (status === "authenticated") setEmail(session.user.email);
+    if (!loading) setSize(event.rsvps.length);
+  }, [status, session,loading]);
+  
   const handleRegisterClick = async (Timestamp) => {
     try {
-      // console.log(Timestamp,email);
+      
       const data = await rsvpevent(Timestamp, email);
       if (data.ok) {
         alert("Slot Reserved Successfully!");
+        setSize(size + 1);
       } else {
         alert("Slot Reservation Failed!");
       }
@@ -47,7 +49,7 @@ const page = () => {
   const handleuserClick = (email) => {
     window.location.replace(`/profile/${email}`);
   };
-  if (!loading) size = event.rsvps.length;
+  
   // console.log(size);
 
   return (
