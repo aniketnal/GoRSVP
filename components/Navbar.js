@@ -21,6 +21,9 @@ const Navbar = () => {
         window.location.replace(`/`);
         signOut();
         break;
+      case "MyRSVP":
+        window.location.replace(`/my-rsvps`);
+        break;
         //similar cases corresponding to value for other options
       default:
         break;
