@@ -9,11 +9,13 @@ const page = () => {
 
   const { data: session, status} = useSession();
   const [events, setEvents] = useState([]);
+  // const [useratt, setuseratt] = useState(0)
   const fetchEvents = async () => {
     try {
       const data = await getusersevent(session.user.email);
-      console.log(data.event);
+      // console.log(data.event);
       setEvents(data.event);
+      // setuseratt(data.userattended);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
@@ -71,8 +73,8 @@ const page = () => {
               //value shall be given by db
               data: [ 
                 { id: 0, value: events.length, label: "Total Events" },
-                { id: 1, value: totalRsvps, label: "Total RSVP's" }, //to be thought upon
-                { id: 2, value: 10, label: "Total Attended" }, //to be thought upon
+                { id: 1, value: totalRsvps, label: "Total RSVP's" }, 
+                { id: 2, value: 5, label: "Total Attended" }, //checkins
               ],
             },
           ]}

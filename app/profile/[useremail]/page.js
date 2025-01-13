@@ -66,7 +66,7 @@ const page = () => {
                   Account Type
                 </label>
                 <div className="w-full p-2 border border-[#ff7c4f] rounded focus:outline-none focus:ring-2 focus:ring-[#ff7c4f] focus:border-transparent bg-[#f2f0e3]">
-                  {resp.isOrgainzer ? "Organizer" : "User"}
+                  {resp.isOrganizer ? "Organizer" : "User"}
                 </div>
               </div>
 

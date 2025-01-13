@@ -86,6 +86,8 @@ export const getusersevent = async (msg) => {
     await connectDB();
     // console.log(msg)
     const event = await Event.find({ organizerEmail: msg, isDeleted:false }).lean();
+    const usere = await User.find({ email: msg});
+    
     if (!event) {
         alert('Event not found');
         window.location.replace("/");
@@ -97,7 +99,7 @@ export const getusersevent = async (msg) => {
         createdAt: event.createdAt.toISOString(),
         Timestamp: event.Timestamp.toString(),
       }));
-    return { event:plainEvents };
+    return { event:plainEvents};
 }
 
 //deletes specific event from Event model.
@@ -128,6 +130,7 @@ export const rsvpevent = async (Timestamp,email) => {
     });
     if (event && flag==0) {
         await Event.updateOne({ Timestamp: Timestamp }, { $push: { rsvps: email } });
+        await User.updateOne({ email: email }, { $push: { rsvpevents: Timestamp } });
         return { ok: true };
       }
     else{
