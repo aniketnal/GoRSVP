@@ -86,7 +86,6 @@ export const getusersevent = async (msg) => {
     await connectDB();
     // console.log(msg)
     const event = await Event.find({ organizerEmail: msg, isDeleted:false }).lean();
-    const usere = await User.find({ email: msg});
     
     if (!event) {
         alert('Event not found');
@@ -153,4 +152,43 @@ export const getuser = async (msg) => {
           };
         return { user: plainuser, ok: true };
     }
+}
+
+//User's RSVPs from User model.
+//fetches specific events from Event model.
+export const getuserrsvps = async (msg) => {
+    await connectDB();
+    // console.log(msg)
+    const userexists = await User.find({ email: msg}).lean();
+    
+    if (!userexists) {
+        alert('User not found');
+        window.location.replace("/");
+    }
+    const plainuser = userexists.map(u => ({
+        ...u,
+        _id: u._id.toString(),
+        createdAt: u.createdAt.toISOString(),
+      }));
+    return { user:plainuser};
+}
+
+//get events from Event model using array of Timestamps.
+export const getspecificevents = async (msg) => {
+    await connectDB();
+    // console.log(msg)
+    const events = await Event.find({ Timestamp: { $in: msg },isDeleted:false }).lean();
+    
+    if (!events) {
+        alert('Events not found');
+        window.location.replace("/");
+      }
+      const plainEvents = events.map(event => ({
+        ...event,
+        _id: event._id.toString(),
+        eventDate: event.eventDate.toISOString(),
+        createdAt: event.createdAt.toISOString(),
+        Timestamp: event.Timestamp.toString(),
+      }));
+    return { events:plainEvents};
 }
