@@ -14,9 +14,9 @@ GoRSVP is a web application designed to manage and track event RSVPs efficiently
 
 This is a Next.js project bootstrapped with create-next-app.
 
-- **Frontend**: Reactjs
-- **Backend**: 
-- **Database**: 
+- **Frontend**: Reactjs, Tailwind CSS
+- **Backend**: Nodejs
+- **Database**: MongoDB
 
 
 ## 🎯Getting Started
@@ -24,14 +24,6 @@ This is a Next.js project bootstrapped with create-next-app.
 First, run the development server:
 
 npm run dev
-
-or
-
-yarn dev
-
-or 
-
-bun dev
 
     Open http://localhost:3000 
     -with your browser to see the result.
@@ -43,6 +35,7 @@ Ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) 
+- .env.local file is created with required session secrets
 
 
 ### 💻Installation
@@ -56,24 +49,20 @@ Ensure you have the following installed:
 
 2. Install dependencies:
 
-    - bash
-
-    - Copy code
-
     - npm install
 
 3. Configure your database:
 
-Update the database configuration in config.js 
+Update the .env.local file with following values :
+- GITHUB_ID=yourkey
+- GITHUB_SECRET=yourkey
 
-(or .env file if used).
+- GOOGLE_CLIENT_ID=yourkey
+- GOOGLE_CLIENT_SECRET=yourkey
 
-### ✏Learn More
-To learn more about Next.js, take a look at the following resources:
-
-Next.js Documentation - learn about Next.js features and API.
-
-Learn Next.js - an interactive Next.js tutorial.
-You can check out the Next.js 
-
+- NEXTAUTH_URL=http://localhost:3000
+- NEXTAUTH_SECRET=somekey
+-
+-
+-
 
