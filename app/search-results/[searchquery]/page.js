@@ -23,7 +23,9 @@ const page = () => {
   useEffect(() => {
     fetchresults();
   }, [searchquery]);
-
+  const handleButtonClick = (timestamp) => {
+    window.location.replace(`/event/${timestamp}`);
+  };
   return (
     <div>
       <div className="mt-10 mb-12 max-w-7xl min-w-2xl mx-auto">
