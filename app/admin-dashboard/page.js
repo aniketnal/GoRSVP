@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import PanelNav from "@/components/PanelNav";
-import { LineChart } from "@mui/x-charts/LineChart";
+import { PieChart } from "@mui/x-charts/PieChart";
 import { Users, Calendar, UserCog } from "lucide-react";
 import { fetchall } from "@/actions/useractions";
 
@@ -53,16 +53,18 @@ export default function page() {
         <div className="p-8">
           {/* Render Main Content */}
           <div className="flex items-center justify-center gap-6">
-            <LineChart
-              className="bg-[rgb(249,248,240)] rounded-lg shadow-md"
-              xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+            <PieChart
               series={[
                 {
-                  data: [2, 5.5, 2, 8.5, 1.5, 5],
+                  data: [
+                    { id: 0, value: users.length, label: "Total Users" },
+                    { id: 1, value: Orgs.length, label: "Total Organizers" },
+                    { id: 2, value: Events.length, label: "Total Events" },
+                  ],
                 },
               ]}
-              width={500}
-              height={300}
+              width={700}
+              height={350}
             />
             <div className="flex justify-center flex-wrap gap-6">
               {stats.map((stat, index) => (
