@@ -293,3 +293,29 @@ export const getalleventsadmin = async () => {
   }));
   return { events: plainEvents };
 };
+
+//master fetcher
+export const fetchall = async () => {
+  await connectDB();
+  const users = await User.find({}).lean();
+  const plainUsers = users.map((user) => ({
+    ...user,
+    _id: user._id.toString(),
+    createdAt: user.createdAt.toISOString(),
+  }));
+  const orgs = await User.find({isOrganizer:true}).lean();
+  const plainorgs = orgs.map((user) => ({
+    ...user,
+    _id: user._id.toString(),
+    createdAt: user.createdAt.toISOString(),
+  }));
+
+  const events = await Event.find({ isDeleted: false }).sort({ Timestamp: -1 }).lean();
+  const plainEvents = events.map((event) => ({
+    ...event,
+    _id: event._id.toString(),
+    eventDate: event.eventDate.toISOString(),
+    createdAt: event.createdAt.toISOString(),
+  }));
+  return { users: plainUsers, events: plainEvents , organizers:plainorgs};
+};
