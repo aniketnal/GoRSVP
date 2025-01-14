@@ -163,7 +163,6 @@ export const getuser = async (msg) => {
 };
 
 //User's RSVPs from User model.
-//fetches specific events from Event model.
 export const getuserrsvps = async (msg) => {
   await connectDB();
   // console.log(msg)
@@ -223,4 +222,23 @@ export const updateevent = async (ts, msg) => {
   } else {
     return { ok: false, error: "event not found" };
   }
+};
+
+//search bar functionality, fetches events from Event model.
+export const searchevents = async (msg) => {
+  await connectDB();
+  const events = await Event.find({eventTitle: { $regex: msg, $options: "i" },
+    isDeleted: false,}).lean(); //$options:"i" -> case insensitive
+  if (!events) {
+    alert("No such events found");
+    window.location.replace("/");
+  }
+  const plainEvents = events.map((event) => ({
+    ...event,
+    _id: event._id.toString(),
+    eventDate: event.eventDate.toISOString(),
+    createdAt: event.createdAt.toISOString(),
+    Timestamp: event.Timestamp.toString(),
+  }));
+  return { events: plainEvents, ok:true };
 };

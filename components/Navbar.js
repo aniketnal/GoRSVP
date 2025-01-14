@@ -1,18 +1,20 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Search, LogIn } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Plus, User } from "lucide-react";
 
 const Navbar = () => {
   const { data: session } = useSession();
-
+  const [searchQuery, setSearchQuery] = useState("");
   const handleSelectChange = (e) => {
     const selectedOption = e.target.value;
     switch (selectedOption) {
       case "Profile":
-        window.location.replace(`/profile/${encodeURIComponent(session.user.email)}`);
+        window.location.replace(
+          `/profile/${encodeURIComponent(session.user.email)}`
+        );
         break;
       case "MyEvents":
         window.location.replace(`/organizer-dashboard`);
@@ -27,9 +29,18 @@ const Navbar = () => {
       case "AdminDash":
         window.location.replace(`/admin-dashboard`);
         break;
-        //similar cases corresponding to value for other options
+      //similar cases corresponding to value for other options
       default:
         break;
+    }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.replace(
+        `/search-results/${encodeURIComponent(searchQuery)}`
+      );
     }
   };
   return (
@@ -46,16 +57,24 @@ const Navbar = () => {
                 GoRSVP
               </Link>
             </div>
-            <div className="searchboxes rounded-md flex gap-4 items-center">
+            <div className="searchboxes rounded-md flex gap-4 items-center ">
               <div className=" flex bg-foreground border-2 border-secondary rounded-full">
-                <button className="p-2 border-2 rounded-full bg-secondary text-footertext">
+                
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search for Events"
+                  id="searchBar"
+                  className="px-3 py-2  bg-foreground text-black font-medium border-none focus:outline-none overflow-auto rounded-full"
+                />
+                <button
+                  className="p-2 border-2 rounded-full bg-secondary text-footertext"
+                  onClick={handleSearch}
+                  id="searchButton"
+                >
                   <Search />
                 </button>
-                <input
-                  className=" text-primary ml-3 rounded-full border-none focus:outline-none bg-inherit"
-                  type="text"
-                  placeholder="Search for Events"
-                />
               </div>
               {session && (
                 <button className="flex items-center gap-1 bg-foreground hover:bg-secondary text-secondary font-semibold hover:text-white py-2 px-4 border-2 border-secondary hover:border-transparent rounded-full">
@@ -66,7 +85,7 @@ const Navbar = () => {
                 </button>
               )}
               {/* shall be a dashboard / Profile Drop down */}
-              
+
               {session && (
                 <div className="flex text-primary">
                   <img
@@ -86,9 +105,15 @@ const Navbar = () => {
                       Hi, {session.user.name}
                     </option>
                     <option value="Profile">Profile</option>
-                    {session.user.admin && <option value="AdminDash">Admin Panel</option>}
+                    {session.user.admin && (
+                      <option value="AdminDash">Admin Panel</option>
+                    )}
                     <option value="MyRSVP">My RSVPs</option>
-                    {session.user.organizer && <option value="MyEvents" href="./organizer-dashboard">My Events</option>}
+                    {session.user.organizer && (
+                      <option value="MyEvents" href="./organizer-dashboard">
+                        My Events
+                      </option>
+                    )}
                     <option value="SignOut">Sign Out</option>
                   </select>
                 </div>
