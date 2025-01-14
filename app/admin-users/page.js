@@ -1,57 +1,90 @@
-"use client"
-import React from 'react';
-import PanelNav from '@/components/PanelNav';
+"use client";
+import React, { useState, useEffect } from "react";
+import PanelNav from "@/components/PanelNav";
+import { getallusers } from "@/actions/useractions";
 
 export default function Page() {
+  const [users, setUsers] = useState([]);
+  const fetchUsers = async () => {
+    try {
+      const userdata = await getallusers();
+      // console.log(userdata.users);
+      setUsers(userdata.users);
+    } catch (error) {
+      console.log("error Occured", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const handleViewClick = (id) => {
+    window.location.replace(`/profile/${id}`);
+  };
+
   return (
     <>
-    <div className='p-1 mx-6'>
-        <PanelNav/>
-    </div>
-    <div className="min-h-screen min-w-full bg-foreground p-4">
-      {/* Main Content */}      
-      <table className="ml-6 w-[96%] border-collapse text-primary bg-white rounded-lg overflow-hidden border border-primary">
+      <div className="p-1 mx-6">
+        <PanelNav />
+      </div>
+      <div className="min-h-screen min-w-full bg-foreground p-4">
+      <div className="text-primary text-2xl font-bold mx-8 my-4"> All Users
+      </div>
+        {/* Main Content */}
+        <table className="ml-6 w-[96%] border-collapse text-primary bg-white rounded-lg overflow-hidden border border-primary">
           <thead>
             <tr className="bg-[rgb(249,248,240)]">
-              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Event Name</th>
-              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Date</th>
-              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Time</th>
-              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Location</th>
-              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">RSVP's</th>
-              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Actions</th>
+              <th className="p-4 border-2 text-center border-primary">
+                Sr. No.
+              </th>
+              <th className="p-4 border-2 text-center border-primary">
+                Email ID
+              </th>
+              <th className="p-4 border-2 text-center border-primary">
+                Name
+              </th>
+              <th className="p-4 border-2 text-center border-primary">
+                RSVP'd Events
+              </th>
+              <th className="p-4 border-2 text-center border-primary">
+                Is Organizer
+              </th>
+              <th className="p-4 border-2 text-center border-primary">
+                Is Admin
+              </th>
+              <th className="p-4 border-2 text-center border-primary">
+                Actions
+              </th>
             </tr>
           </thead>
           {/* dynamic rows below */}
-          {/* <tbody>
-            {events.map((event, index) => (
+          <tbody>
+            {users.map((u, index) => (
               <tr
-                key={event.Timestamp}
+                key={u.email}
                 className={
                   index % 2 === 0 ? "bg-foreground border-2 border-primary" : "bg-[rgb(249,248,240)] border-2 border-primary"
                 }
               >
-                <td className="p-4 border-t text-center border-r-2 border-primary">{event.eventTitle}</td>
-                <td className="p-4 border-t text-center border-r-2 border-primary">{new Date(event.eventDate).toLocaleDateString()}</td>
-                <td className="p-4 border-t text-center border-r-2 border-primary">{event.eventTime}</td>
-                <td className="p-4 border-t text-center border-r-2 border-primary">{event.eventLocation}</td>
-                <td className="p-4 border-t text-center border-r-2 border-primary">{event.rsvps.length}</td> 
-                <td className="p-4 flex justify-center border-t gap-3 border-r-2 border-primary">
-                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleViewClick(event.Timestamp)}}>
+                <td className="p-4 border-2 text-center border-primary">{index+1}</td>
+                <td className="p-4 border-2 text-center border-primary">{u.email}</td>
+                <td className="p-4 border-2 text-center border-primary">{u.name}</td>
+                <td className="p-4 border-2 text-center border-primary">{u.rsvpevents.length}</td>
+                <td className="p-4 border-2 text-center border-primary">{u.isOrganizer?"Yes":"No"}</td> 
+                <td className="p-4 border-2 text-center border-primary">{u.isAdmin?"Yes":"No"}</td> 
+                <td className="p-4 border-2 text-center border-primary">
+                <div className="flex justify-center  gap-3">
+                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleViewClick(u.email)}}>
                     View
                   </button>
-                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleEditClick(event.Timestamp)}}>
-                    Edit
-                  </button>
-                  <button className="px-3 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleDeleteClick(event.Timestamp)}}>
-                    Delete
-                  </button>
+                </div>
                 </td>
               </tr>
             ))}
-          </tbody> */}
+          </tbody>
         </table>
-      
-    </div>
+      </div>
     </>
   );
 }

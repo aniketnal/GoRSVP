@@ -242,3 +242,15 @@ export const searchevents = async (msg) => {
   }));
   return { events: plainEvents, ok:true };
 };
+
+//gets all users
+export const getallusers = async (msg) => {
+  await connectDB();
+  const users = await User.find({}).lean();
+  const plainUsers = users.map((user) => ({
+    ...user,
+    _id: user._id.toString(),
+    createdAt: user.createdAt.toISOString(),
+  }));
+  return { users: plainUsers };
+};
