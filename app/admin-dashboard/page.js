@@ -8,7 +8,6 @@ import {
   LayoutDashboard, 
   Users, 
   Calendar, 
-  Ticket, 
   UserCog
 } from 'lucide-react';
 
@@ -42,7 +41,7 @@ export default function DashboardLayout() {
             width={500}
             height={300}
           />
-          <div className='flex justify-center flex-wrap gap-3'>
+          <div className='flex justify-center flex-wrap gap-6'>
           {stats.map((stat, index) => (
               <div key={index} className="p-6 w-1/2 bg-[rgb(249,248,240)] rounded-lg shadow-sm border border-gray-100">
                 <div className="flex justify-between items-start">
