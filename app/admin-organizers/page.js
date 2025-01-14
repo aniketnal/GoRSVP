@@ -29,7 +29,7 @@ export default function Page() {
         <PanelNav />
       </div>
       <div className="min-h-screen min-w-full bg-foreground p-4">
-      <div className="text-primary text-2xl font-bold mx-8 my-4"> All Users
+      <div className="text-primary text-2xl font-bold mx-8 my-4"> All Organizers
       </div>
         {/* Main Content */}
         <table className="ml-6 w-[96%] border-collapse text-primary bg-white rounded-lg overflow-hidden border border-primary">

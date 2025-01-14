@@ -281,3 +281,15 @@ export const updateuserevent = async (email,timestamp) => {
     return { ok: false, error: "user not found" };
   }
 };
+
+export const getalleventsadmin = async () => {
+  await connectDB();
+  const events = await Event.find({ isDeleted: false }).sort({ Timestamp: -1 }).lean();
+  const plainEvents = events.map((event) => ({
+    ...event,
+    _id: event._id.toString(),
+    eventDate: event.eventDate.toISOString(),
+    createdAt: event.createdAt.toISOString(),
+  }));
+  return { events: plainEvents };
+};
