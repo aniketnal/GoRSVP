@@ -3,7 +3,7 @@ import React, { useEffect, useState }  from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { becomeorganizer,saveevent } from "@/actions/useractions";
 
-const page = () => {
+const Page = () => {
   const { data: session, status } = useSession();
 
   // if user is not authenticated, redirect to home page
@@ -194,4 +194,4 @@ const [eventData, seteventData] = useState({
   );
 };
 
-export default page;
+export default Page;
