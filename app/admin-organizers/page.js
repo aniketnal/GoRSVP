@@ -22,6 +22,20 @@ export default function Page() {
   const handleViewClick = (id) => {
     window.location.replace(`/profile/${id}`);
   };
+  const handleDeleteClick = async (email) => {
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this user?"
+      );
+      if (confirmed) {
+        const result = await deleteuser(email);
+        if (result.ok) {
+          alert("User Deleted Successfully");
+          fetchUsers();
+        } else {
+          alert("Failed to delete user");
+        }
+      }
+    };
 
   return (
     <>
@@ -69,6 +83,9 @@ export default function Page() {
                 <div className="flex justify-center  gap-3">
                   <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleViewClick(u.email)}}>
                     View
+                  </button>
+                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleDeleteClick(u.email)}}>
+                    Delete
                   </button>
                 </div>
                 </td>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import PanelNav from "@/components/PanelNav";
-import { getallusers } from "@/actions/useractions";
+import { deleteuser, getallusers } from "@/actions/useractions";
 
 export default function Page() {
   const [users, setUsers] = useState([]);
@@ -22,6 +22,20 @@ export default function Page() {
   const handleViewClick = (id) => {
     window.location.replace(`/profile/${id}`);
   };
+  const handleDeleteClick = async (email) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (confirmed) {
+      const result = await deleteuser(email);
+      if (result.ok) {
+        alert("User Deleted Successfully");
+        fetchUsers();
+      } else {
+        alert("Failed to delete user");
+      }
+    }
+  };
 
   return (
     <>
@@ -29,8 +43,10 @@ export default function Page() {
         <PanelNav />
       </div>
       <div className="min-h-screen min-w-full bg-foreground p-4">
-      <div className="text-primary text-2xl font-bold mx-8 my-4"> All Users
-      </div>
+        <div className="text-primary text-2xl font-bold mx-8 my-4">
+          {" "}
+          All Users
+        </div>
         {/* Main Content */}
         <table className="ml-6 w-[96%] border-collapse text-primary bg-white rounded-lg overflow-hidden border border-primary">
           <thead>
@@ -41,9 +57,7 @@ export default function Page() {
               <th className="p-4 border-2 text-center border-primary">
                 Email ID
               </th>
-              <th className="p-4 border-2 text-center border-primary">
-                Name
-              </th>
+              <th className="p-4 border-2 text-center border-primary">Name</th>
               <th className="p-4 border-2 text-center border-primary">
                 RSVP'd Events
               </th>
@@ -64,21 +78,48 @@ export default function Page() {
               <tr
                 key={u.email}
                 className={
-                  index % 2 === 0 ? "bg-foreground border-2 border-primary" : "bg-[rgb(249,248,240)] border-2 border-primary"
+                  index % 2 === 0
+                    ? "bg-foreground border-2 border-primary"
+                    : "bg-[rgb(249,248,240)] border-2 border-primary"
                 }
               >
-                <td className="p-4 border-2 text-center border-primary">{index+1}</td>
-                <td className="p-4 border-2 text-center border-primary">{u.email}</td>
-                <td className="p-4 border-2 text-center border-primary">{u.name}</td>
-                <td className="p-4 border-2 text-center border-primary">{u.rsvpevents.length}</td>
-                <td className="p-4 border-2 text-center border-primary">{u.isOrganizer?"Yes":"No"}</td> 
-                <td className="p-4 border-2 text-center border-primary">{u.isAdmin?"Yes":"No"}</td> 
                 <td className="p-4 border-2 text-center border-primary">
-                <div className="flex justify-center  gap-3">
-                  <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleViewClick(u.email)}}>
-                    View
-                  </button>
-                </div>
+                  {index + 1}
+                </td>
+                <td className="p-4 border-2 text-center border-primary">
+                  {u.email}
+                </td>
+                <td className="p-4 border-2 text-center border-primary">
+                  {u.name}
+                </td>
+                <td className="p-4 border-2 text-center border-primary">
+                  {u.rsvpevents.length}
+                </td>
+                <td className="p-4 border-2 text-center border-primary">
+                  {u.isOrganizer ? "Yes" : "No"}
+                </td>
+                <td className="p-4 border-2 text-center border-primary">
+                  {u.isAdmin ? "Yes" : "No"}
+                </td>
+                <td className="p-4 border-2 text-center border-primary">
+                  <div className="flex justify-center  gap-3">
+                    <button
+                      className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md"
+                      onClick={() => {
+                        handleViewClick(u.email);
+                      }}
+                    >
+                      View
+                    </button>
+                    <button
+                      className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md"
+                      onClick={() => {
+                        handleDeleteClick(u.email);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

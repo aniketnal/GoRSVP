@@ -53,7 +53,10 @@ export const saveevent = async (msg) => {
 //fetches all events from Event model. (Latest first)
 export const getallevents = async (msg) => {
   await connectDB();
-  const events = await Event.find({ isDeleted: false }).sort({ Timestamp: -1 }).limit(6).lean();
+  const events = await Event.find({ isDeleted: false })
+    .sort({ Timestamp: -1 })
+    .limit(6)
+    .lean();
   const plainEvents = events.map((event) => ({
     ...event,
     _id: event._id.toString(),
@@ -75,7 +78,7 @@ export const getevent = async (msg) => {
     // alert("Event not found");
     // window.location.replace("/");
     console.log("Event not found");
-    return{ok:false}
+    return { ok: false };
   }
   const plainEvent = {
     ...event,
@@ -128,7 +131,7 @@ export const rsvpevent = async (Timestamp, email) => {
   let flag = 0;
   const event = await Event.findOne({ Timestamp: Timestamp, isDeleted: false });
   const rsvpold = event.rsvps;
-//   console.log(rsvpold);
+  //   console.log(rsvpold);
   rsvpold.forEach((e) => {
     if (e == email) {
       flag = 1;
@@ -230,8 +233,10 @@ export const updateevent = async (ts, msg) => {
 //search bar functionality, fetches events from Event model.
 export const searchevents = async (msg) => {
   await connectDB();
-  const events = await Event.find({eventTitle: { $regex: msg, $options: "i" },
-    isDeleted: false,}).lean(); //$options:"i" -> case insensitive
+  const events = await Event.find({
+    eventTitle: { $regex: msg, $options: "i" },
+    isDeleted: false,
+  }).lean(); //$options:"i" -> case insensitive
   if (!events) {
     alert("No such events found");
     window.location.replace("/");
@@ -243,13 +248,13 @@ export const searchevents = async (msg) => {
     createdAt: event.createdAt.toISOString(),
     Timestamp: event.Timestamp.toString(),
   }));
-  return { events: plainEvents, ok:true };
+  return { events: plainEvents, ok: true };
 };
 
 //gets all users
-export const getallusers = async (msg) => {
+export const getallusers = async () => {
   await connectDB();
-  const users = await User.find({}).lean();
+  const users = await User.find({isDeleted:false}).lean();
   const plainUsers = users.map((user) => ({
     ...user,
     _id: user._id.toString(),
@@ -259,9 +264,9 @@ export const getallusers = async (msg) => {
 };
 
 //gets just organizers
-export const getorganizers = async (msg) => {
+export const getorganizers = async () => {
   await connectDB();
-  const users = await User.find({ isOrganizer: true }).lean();
+  const users = await User.find({ isOrganizer: true, isDeleted:false }).lean();
   const plainUsers = users.map((user) => ({
     ...user,
     _id: user._id.toString(),
@@ -271,22 +276,26 @@ export const getorganizers = async (msg) => {
 };
 
 //update user with its timestamp of event
-export const updateuserevent = async (email,timestamp) => {
+export const updateuserevent = async (email, timestamp) => {
   await connectDB();
-  console.log(email,timestamp)
+  console.log(email, timestamp);
   const user = await User.findOne({ email: email });
   if (user) {
-    await User.updateOne({ email: email }, { $push: { createdevents: timestamp } });
+    await User.updateOne(
+      { email: email },
+      { $push: { createdevents: timestamp } }
+    );
     return { ok: true };
-  }
-  else {
+  } else {
     return { ok: false, error: "user not found" };
   }
 };
 
 export const getalleventsadmin = async () => {
   await connectDB();
-  const events = await Event.find({ isDeleted: false }).sort({ Timestamp: -1 }).lean();
+  const events = await Event.find({ isDeleted: false })
+    .sort({ Timestamp: -1 })
+    .lean();
   const plainEvents = events.map((event) => ({
     ...event,
     _id: event._id.toString(),
@@ -305,25 +314,27 @@ export const fetchall = async () => {
     _id: user._id.toString(),
     createdAt: user.createdAt.toISOString(),
   }));
-  const orgs = await User.find({isOrganizer:true}).lean();
+  const orgs = await User.find({ isOrganizer: true }).lean();
   const plainorgs = orgs.map((user) => ({
     ...user,
     _id: user._id.toString(),
     createdAt: user.createdAt.toISOString(),
   }));
 
-  const events = await Event.find({ isDeleted: false }).sort({ Timestamp: -1 }).lean();
+  const events = await Event.find({ isDeleted: false })
+    .sort({ Timestamp: -1 })
+    .lean();
   const plainEvents = events.map((event) => ({
     ...event,
     _id: event._id.toString(),
     eventDate: event.eventDate.toISOString(),
     createdAt: event.createdAt.toISOString(),
   }));
-  return { users: plainUsers, events: plainEvents , organizers:plainorgs};
+  return { users: plainUsers, events: plainEvents, organizers: plainorgs };
 };
 
 //add to checkin array
-export const checkinevent = async (timestamp,email) => {
+export const checkinevent = async (timestamp, email) => {
   await connectDB();
   const event = await Event.findOne({ Timestamp: timestamp, isDeleted: false });
   if (event) {
@@ -338,7 +349,7 @@ export const checkinevent = async (timestamp,email) => {
 };
 
 //remove from checkin array
-export const checkoutevent = async (timestamp,email) => {
+export const checkoutevent = async (timestamp, email) => {
   await connectDB();
   const event = await Event.findOne({ Timestamp: timestamp, isDeleted: false });
   if (event) {
@@ -349,5 +360,17 @@ export const checkoutevent = async (timestamp,email) => {
     return { ok: true };
   } else {
     return { ok: false, error: "event not found" };
+  }
+};
+
+//set user as deleted
+export const deleteuser = async (email) => {
+  await connectDB();
+  const user = await User.findOne({ email: email });
+  if (user) {
+    await User.updateOne({ email: email }, { isDeleted: true });
+    return { ok: true };
+  } else {
+    return { ok: false, error: "user not found" };
   }
 };

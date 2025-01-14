@@ -30,6 +30,10 @@ export const authoptions = NextAuth({
           })
           await newUser.save();
         }
+        else if(currentUser && currentUser.isDeleted ){
+          currentUser.isDeleted = false;
+          await currentUser.save();
+        }
         return true;
       }
       

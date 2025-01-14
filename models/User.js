@@ -9,6 +9,7 @@ const userSchema = new Schema({
     isAdmin: { type: Boolean, default: false },
     createdevents: {type: Array},
     rsvpevents: {type: Array},
+    isDeleted: {type: Boolean, default: false},
     createdAt: {type: Date, default: Date.now},
 });
 
