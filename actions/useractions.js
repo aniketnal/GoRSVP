@@ -44,15 +44,16 @@ export const saveevent = async (msg) => {
     eventCapacity: msg.eventCapacity,
     eventBanner: msg.eventBanner,
     eventDescription: msg.eventDescription,
+    Timestamp: msg.Timestamp,
   });
   await newevent.save();
   return { ok: true };
 };
 
-//fetches all events from Event model.
+//fetches all events from Event model. (Latest first)
 export const getallevents = async (msg) => {
   await connectDB();
-  const events = await Event.find({ isDeleted: false }).lean();
+  const events = await Event.find({ isDeleted: false }).sort({ Timestamp: -1 }).limit(6).lean();
   const plainEvents = events.map((event) => ({
     ...event,
     _id: event._id.toString(),
@@ -253,4 +254,30 @@ export const getallusers = async (msg) => {
     createdAt: user.createdAt.toISOString(),
   }));
   return { users: plainUsers };
+};
+
+//gets just organizers
+export const getorganizers = async (msg) => {
+  await connectDB();
+  const users = await User.find({ isOrganizer: true }).lean();
+  const plainUsers = users.map((user) => ({
+    ...user,
+    _id: user._id.toString(),
+    createdAt: user.createdAt.toISOString(),
+  }));
+  return { users: plainUsers };
+};
+
+//update user with its timestamp of event
+export const updateuserevent = async (email,timestamp) => {
+  await connectDB();
+  console.log(email,timestamp)
+  const user = await User.findOne({ email: email });
+  if (user) {
+    await User.updateOne({ email: email }, { $push: { createdevents: timestamp } });
+    return { ok: true };
+  }
+  else {
+    return { ok: false, error: "user not found" };
+  }
 };

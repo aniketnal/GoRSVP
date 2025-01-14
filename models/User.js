@@ -7,6 +7,7 @@ const userSchema = new Schema({
     image: {type: String},
     isOrganizer: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },
+    createdevents: {type: Array},
     rsvpevents: {type: Array},
     createdAt: {type: Date, default: Date.now},
 });

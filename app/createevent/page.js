@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState }  from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
-import { becomeorganizer,saveevent } from "@/actions/useractions";
+import { becomeorganizer,saveevent, updateuserevent } from "@/actions/useractions";
 
 const Page = () => {
   const { data: session, status } = useSession();
@@ -39,6 +39,7 @@ const [eventData, seteventData] = useState({
     eventDescription: "",
     organizerEmail: session.user.email,
     organizerName : session.user.name,
+    Timestamp: Date.now(),
   });
 
   const handleChange = (e) => {
@@ -50,9 +51,10 @@ const [eventData, seteventData] = useState({
     
     try {
       const response = await saveevent(eventData);
-      if (response.ok) {
+      const upduser = await updateuserevent(session.user.email, eventData.Timestamp )
+      if (response.ok && upduser.ok) {
         alert("We have listed your event!"); 
-        seteventData({ eventTitle: "", eventDate: "", eventTime: "", eventLocation: "", eventCapacity: "", eventBanner: "", eventDescription: "",organizerEmail: session.user.email, organizerName : session.user.name, });
+        seteventData({ eventTitle: "", eventDate: "", eventTime: "", eventLocation: "", eventCapacity: "", eventBanner: "", eventDescription: "",organizerEmail: session.user.email, organizerName : session.user.name,Timestamp: Date.now(), });
         window.location.replace("/");
       } else {
         alert("Please try again later, we're having some issues");
