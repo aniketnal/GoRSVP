@@ -86,15 +86,15 @@ const page = () => {
       <div className="flex flex-col justify-center p-4">
         <div className="text-primary text-2xl ml-8 mb-10">My Events</div>
 
-        <table className="ml-6 w-[96%] border-collapse text-primary bg-white rounded-lg overflow-hidden">
+        <table className="ml-6 w-[96%] border-collapse text-primary bg-white rounded-lg overflow-hidden border-2 border-primary">
           <thead>
             <tr className="bg-[rgb(249,248,240)]">
-              <th className="p-4 text-left font-semibold">Event Name</th>
-              <th className="p-4 text-left font-semibold">Date</th>
-              <th className="p-4 text-left font-semibold">Time</th>
-              <th className="p-4 text-left font-semibold">Location</th>
-              <th className="p-4 text-left font-semibold">RSVP's</th>
-              <th className="p-4 text-left font-semibold">Actions</th>
+              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Event Name</th>
+              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Date</th>
+              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Time</th>
+              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Location</th>
+              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">RSVP's</th>
+              <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">Actions</th>
             </tr>
           </thead>
           {/* dynamic rows below */}
@@ -103,15 +103,16 @@ const page = () => {
               <tr
                 key={event.Timestamp}
                 className={
-                  index % 2 === 0 ? "bg-foreground" : "bg-[rgb(249,248,240)]"
+                  index % 2 === 0 ? "bg-foreground border-2 border-primary" : "bg-[rgb(249,248,240)] border-2 border-primary"
                 }
               >
-                <td className="p-4 border-t">{event.eventTitle}</td>
-                <td className="p-4 border-t">{new Date(event.eventDate).toLocaleDateString()}</td>
-                <td className="p-4 border-t">{event.eventTime}</td>
-                <td className="p-4 border-t">{event.eventLocation}</td>
-                <td className="p-4 border-t">{event.rsvps.length}</td> 
-                <td className="p-4 border-t">
+                <td className="p-4 border-2 text-center bo border-primary">{event.eventTitle}</td>
+                <td className="p-4 border-2 text-center bo border-primary">{new Date(event.eventDate).toLocaleDateString()}</td>
+                <td className="p-4 border-2 text-center bo border-primary">{event.eventTime}</td>
+                <td className="p-4 border-2 text-center bo border-primary">{event.eventLocation}</td>
+                <td className="p-4 border-2 text-center bo border-primary">{event.rsvps.length}</td> 
+                <td className="p-4 mx-auto border-2 border-primary">
+                  <div className="flex justify-center  gap-3">
                   <button className="px-3 mr-2 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleViewClick(event.Timestamp)}}>
                     View
                   </button>
@@ -121,6 +122,7 @@ const page = () => {
                   <button className="px-3 py-1 border-2 border-secondary text-secondary hover:text-footertext hover:bg-secondary rounded-md" onClick={()=>{handleDeleteClick(event.Timestamp)}}>
                     Delete
                   </button>
+                  </div>
                 </td>
               </tr>
             ))}

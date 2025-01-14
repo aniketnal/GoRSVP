@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
 import PanelNav from '@/components/PanelNav';
+import { LineChart } from '@mui/x-charts/LineChart';
 
 // Rest of your imports
 import { 
@@ -17,7 +18,6 @@ export default function DashboardLayout() {
     { title: 'Total Users', value: '120', change: '12.6% from last month', icon: <Users className="w-6 h-6 text-red-800" /> },
     { title: 'Total Organizers', value: '30', change: '12.6% from last month', icon: <UserCog className="w-6 h-6 text-red-800" /> },
     { title: 'Total Event/Sessions', value: '40', change: '12.6% from last month', icon: <Calendar className="w-6 h-6 text-red-800" /> },
-    { title: "Total RSVP's", value: '200', change: '12.6% from last month', icon: <Ticket className="w-6 h-6 text-red-800" /> }
   ];
 
   
@@ -31,9 +31,20 @@ export default function DashboardLayout() {
       {/* Main Content */}      
         <div className="p-8">
           {/* Render Main Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="p-6 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className="flex items-center justify-center gap-6">
+          <LineChart className='bg-[rgb(249,248,240)] rounded-lg shadow-md'
+            xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+            series={[
+              {
+                data: [2, 5.5, 2, 8.5, 1.5, 5],
+              },
+            ]}
+            width={500}
+            height={300}
+          />
+          <div className='flex justify-center flex-wrap gap-3'>
+          {stats.map((stat, index) => (
+              <div key={index} className="p-6 w-1/2 bg-[rgb(249,248,240)] rounded-lg shadow-sm border border-gray-100">
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="text-gray-600 mb-1">{stat.title}</p>
@@ -44,6 +55,7 @@ export default function DashboardLayout() {
                 </div>
               </div>
             ))}
+          </div>
           </div>
         </div>
       

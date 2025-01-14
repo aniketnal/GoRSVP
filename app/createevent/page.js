@@ -194,4 +194,4 @@ const [eventData, seteventData] = useState({
   );
 };
 
-export default page;
+export default Page;
