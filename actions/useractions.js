@@ -72,8 +72,10 @@ export const getevent = async (msg) => {
     isDeleted: false,
   }).lean();
   if (!event) {
-    alert("Event not found");
-    window.location.replace("/");
+    // alert("Event not found");
+    // window.location.replace("/");
+    console.log("Event not found");
+    return{ok:false}
   }
   const plainEvent = {
     ...event,
@@ -318,4 +320,34 @@ export const fetchall = async () => {
     createdAt: event.createdAt.toISOString(),
   }));
   return { users: plainUsers, events: plainEvents , organizers:plainorgs};
+};
+
+//add to checkin array
+export const checkinevent = async (timestamp,email) => {
+  await connectDB();
+  const event = await Event.findOne({ Timestamp: timestamp, isDeleted: false });
+  if (event) {
+    await Event.updateOne(
+      { Timestamp: timestamp },
+      { $push: { checkin: email } }
+    );
+    return { ok: true };
+  } else {
+    return { ok: false, error: "event not found" };
+  }
+};
+
+//remove from checkin array
+export const checkoutevent = async (timestamp,email) => {
+  await connectDB();
+  const event = await Event.findOne({ Timestamp: timestamp, isDeleted: false });
+  if (event) {
+    await Event.updateOne(
+      { Timestamp: timestamp },
+      { $pull: { checkin: email } }
+    );
+    return { ok: true };
+  } else {
+    return { ok: false, error: "event not found" };
+  }
 };
