@@ -39,7 +39,7 @@ const page = () => {
     window.location.replace(`/event/${timestamp}`);
   };
   const handleEditClick = (timestamp) => {
-    window.location.replace(`/event/${timestamp}`);
+    window.location.replace(`/editevent/${timestamp}`);
   };
   const handleDeleteClick = async (timestamp) => {
     const confirmed = window.confirm("Are you sure you want to delete this event?");

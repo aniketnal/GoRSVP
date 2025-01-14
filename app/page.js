@@ -13,7 +13,7 @@ const Page = () => {
     const fetchEvents = async () => {
       try {
         const data = await getallevents();
-        console.log(data.events);
+        // console.log(data.events);
         setEvents(data.events);
       } catch (error) {
         console.error("Error fetching events:", error);

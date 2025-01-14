@@ -1,83 +1,99 @@
-"use client"
-import React, { useEffect, useState }  from "react";
-import { useSession, signIn, signOut } from "next-auth/react"
-import { becomeorganizer,saveevent } from "@/actions/useractions";
+"use client";
+import React, { useEffect, useState } from "react";
+import { useSession, signIn } from "next-auth/react";
+import { useParams } from "next/navigation";
+import { getevent, updateevent } from "@/actions/useractions";
 
 const page = () => {
   const { data: session, status } = useSession();
+  const params = useParams();
 
-  // if user is not authenticated, redirect to home page
-  if(status != "authenticated"){ window.location.replace("/"); }
-  
-  useEffect(() => {
-    async function orgconvertor() {
-      if(session.user.organizer == false){
-        try {
-              const response = await becomeorganizer(session.user);
-              if (response.ok) {
-                alert("You are now an organizer"); 
-              } else {
-                alert("Try again later");
-              }
-            } catch (error) {
-              console.error("Error making you organizer", error);
-              alert("Please try again later");
-            }
-      }
-    }
-    orgconvertor();
-  }, [session,status]); //even if array is empty, runs twice. might be strict mode issue.
-
-  //form logic
-const [eventData, seteventData] = useState({
+  const [loading, setLoading] = useState(true);
+  const [event, setevent] = useState({
     eventTitle: "",
+    eventDescription: "",
     eventDate: "",
     eventTime: "",
     eventLocation: "",
-    eventCapacity: "",
     eventBanner: "",
-    eventDescription: "",
-    organizerEmail: session.user.email,
-    organizerName : session.user.name,
   });
 
-  const handleChange = (e) => {
-    seteventData({ ...eventData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    if (status === "loading") return;
+    if (status === "unauthenticated") {
+      signIn();
+      return;
+    }
+
+    if (status === "authenticated" && session) {
+      const fetchEvent = async () => {
+        const ts = params.evtime;
+        try {
+          const data = await getevent(ts);
+          setevent(data.event);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching event:", error);
+          setLoading(false);
+        }
+      };
+
+      fetchEvent();
+    }
+  }, [session, status]);
+
+  if (status === "loading" || loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!session) {
+    return null;
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setevent((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    const ts = params.evtime;
     try {
-      const response = await saveevent(eventData);
-      if (response.ok) {
-        alert("We have listed your event!"); 
-        seteventData({ eventTitle: "", eventDate: "", eventTime: "", eventLocation: "", eventCapacity: "", eventBanner: "", eventDescription: "",organizerEmail: session.user.email, organizerName : session.user.name, });
+      const result = await updateevent(ts, event);
+      if (result.ok) {
+        alert("Event updated successfully!");
         window.location.replace("/");
       } else {
-        alert("Please try again later, we're having some issues");
+        alert("Failed to update event.");
       }
     } catch (error) {
-      console.error("Error saving Event:", error);
-      alert("Please Fill out all fields");
+      console.error("Error updating event:", error);
     }
   };
- 
+
   return (
     <div className="bg-foreground flex justify-center items-center min-h-screen">
       <div className="bg-[rgb(249,248,240)] p-6 rounded-lg shadow-md w-full max-w-3xl">
-        <h1 className="text-2xl font-semibold text-secondary mb-4">Create New Event</h1>
-        <form onSubmit={handleSubmit}>
+        <h1 className="text-2xl font-semibold text-secondary mb-4">
+          Create New Event
+        </h1>
+        <form>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
-              <label htmlFor="eventTitle" className="block text-medium font-medium text-gray-900">
+              <label
+                htmlFor="eventTitle"
+                className="block text-medium font-medium text-gray-900"
+              >
                 Event Title
               </label>
               <input
                 id="eventTitle"
                 name="eventTitle"
-                value={seteventData.eventTitle}
-                onChange={handleChange}
+                value={event.eventTitle}
+                onChange={handleInputChange}
                 required
                 type="text"
                 placeholder="Hackathon 2025"
@@ -85,73 +101,88 @@ const [eventData, seteventData] = useState({
               />
             </div>
             <div>
-              <label htmlFor="eventDate" className="block text-medium font-medium text-gray-900">
+              <label
+                htmlFor="eventDate"
+                className="block text-medium font-medium text-gray-900"
+              >
                 Event Date
               </label>
               <input
                 id="eventDate"
                 name="eventDate"
-                value={seteventData.eventDate}
-                onChange={handleChange}
+                value={new Date(event.eventDate).toISOString().split("T")[0]}
+                onChange={handleInputChange}
                 required
                 type="date"
                 className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
-              <label htmlFor="eventTime" className="block text-medium font-medium text-gray-900">
+              <label
+                htmlFor="eventTime"
+                className="block text-medium font-medium text-gray-900"
+              >
                 Event Time
               </label>
               <input
                 type="time"
                 id="eventTime"
                 name="eventTime"
-                value={seteventData.eventTime}
-                onChange={handleChange}
+                value={event.eventTime}
+                onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
-              <label htmlFor="location" className="block text-medium font-medium text-gray-900">
+              <label
+                htmlFor="location"
+                className="block text-medium font-medium text-gray-900"
+              >
                 Location
               </label>
               <input
                 type="text"
                 id="eventLocation"
                 name="eventLocation"
-                value={seteventData.eventLocation}
-                onChange={handleChange}
+                value={event.eventLocation}
+                onChange={handleInputChange}
                 required
                 placeholder="Nashik Central"
                 className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
-              <label htmlFor="maxCapacity" className="block text-medium font-medium text-gray-900">
+              <label
+                htmlFor="maxCapacity"
+                className="block text-medium font-medium text-gray-900"
+              >
                 Maximum Capacity
               </label>
               <input
                 type="number"
                 id="eventCapacity"
                 name="eventCapacity"
-                value={seteventData.eventCapacity}
-                onChange={handleChange}
+                value={event.eventCapacity}
+                onChange={handleInputChange}
                 required
                 placeholder="e.g. 500"
                 className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
               />
             </div>
             <div>
-              <label htmlFor="bannerUrl" className="block text-medium font-medium text-gray-900">
+              <label
+                htmlFor="bannerUrl"
+                className="block text-medium font-medium text-gray-900"
+              >
                 Banner URL
               </label>
               <input
                 type="url"
                 id="eventBanner"
                 name="eventBanner"
-                value={seteventData.eventBanner}
-                onChange={handleChange}
+                value={event.eventBanner}
+                onChange={handleInputChange}
                 required
                 placeholder="e.g. drive.google.com/path"
                 className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-primary focus:outline-none text-black font-medium"
@@ -159,14 +190,17 @@ const [eventData, seteventData] = useState({
             </div>
           </div>
           <div className="mb-6">
-            <label htmlFor="description" className="block text-medium font-medium text-gray-900">
+            <label
+              htmlFor="description"
+              className="block text-medium font-medium text-gray-900"
+            >
               Event Description
             </label>
             <textarea
               id="eventDescription"
               name="eventDescription"
-              value={seteventData.eventDescription}
-              onChange={handleChange}
+              value={event.eventDescription}
+              onChange={handleInputChange}
               required
               rows="4"
               placeholder="Write event description here..."
@@ -176,13 +210,15 @@ const [eventData, seteventData] = useState({
           </div>
           <div className="flex justify-between">
             <button
-              type="button" onClick={() => window.location.replace("/") }
+              type="button"
+              onClick={() => window.location.replace("/")}
               className="px-4 py-2 bg-primary  text-footertext rounded-md hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1"
             >
               Cancel
             </button>
             <button
               type="submit"
+              onClick={handleSubmit}
               className="px-4 py-2 text-secondary bg-foreground rounded-md  shadow-sm focus:shadow-md hover:bg-secondary hover:text-footertext border-2 border-secondary"
             >
               Create Event
