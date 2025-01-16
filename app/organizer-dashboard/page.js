@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { getusersevent, deleteevent } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 
 const page = () => {
   const { data: session, status } = useSession();
@@ -47,10 +48,10 @@ const page = () => {
     if (confirmed) {
       const result = await deleteevent(timestamp);
       if (result.ok) {
-        alert("Event Deleted Successfully");
+        toast.success("Event Deleted Successfully");
         fetchEvents();
       } else {
-        alert("Failed to delete event");
+        toast.error("Failed to delete event");
       }
     }
   };

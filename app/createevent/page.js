@@ -2,12 +2,10 @@
 import React, { useEffect, useState }  from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { becomeorganizer,saveevent, updateuserevent } from "@/actions/useractions";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const { data: session, status } = useSession();
-
-  // if user is not authenticated, redirect to home page
-  if(status != "authenticated"){ window.location.replace("/"); }
   
   useEffect(() => {
     async function orgconvertor() {
@@ -15,13 +13,12 @@ const Page = () => {
         try {
               const response = await becomeorganizer(session.user);
               if (response.ok) {
-                alert("You are now an organizer"); 
+                toast.success("You are now an organizer"); 
               } else {
-                alert("Try again later");
+                toast.error("Try again later");
               }
             } catch (error) {
               console.error("Error making you organizer", error);
-              alert("Please try again later");
             }
       }
     }
@@ -53,15 +50,15 @@ const [eventData, seteventData] = useState({
       const response = await saveevent(eventData);
       const upduser = await updateuserevent(session.user.email, eventData.Timestamp )
       if (response.ok && upduser.ok) {
-        alert("We have listed your event!"); 
+        toast.success("We have listed your event!"); 
         seteventData({ eventTitle: "", eventDate: "", eventTime: "", eventLocation: "", eventCapacity: "", eventBanner: "", eventDescription: "",organizerEmail: session.user.email, organizerName : session.user.name,Timestamp: Date.now(), });
         window.location.replace("/");
       } else {
-        alert("Please try again later, we're having some issues");
+        toast.error("Please try again later, we're having some issues");
       }
     } catch (error) {
       console.error("Error saving Event:", error);
-      alert("Please Fill out all fields");
+      toast.error("Please Fill out all fields");
     }
   };
  

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { savecontact } from "@/actions/useractions";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const Page = () => {
     try {
       const response = await savecontact(formData);
       if (response.ok) {
-        alert("We have received your message!"); 
+        toast.success("We'll get back to you soon!");
         setFormData({ name: "", email: "", message: "" });
       } else {
         alert("Please try again later, we're having some issues");

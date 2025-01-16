@@ -2,13 +2,15 @@
 import React, { useState, useEffect } from "react";
 import PanelNav from "@/components/PanelNav";
 import { deleteuser, getallusers } from "@/actions/useractions";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { toast } from "react-toastify";
 
 export default function Page() {
+  const { data: session, status } = useSession();
   const [users, setUsers] = useState([]);
   const fetchUsers = async () => {
     try {
       const userdata = await getallusers();
-      // console.log(userdata.users);
       setUsers(userdata.users);
     } catch (error) {
       console.log("error Occured", error);
@@ -18,7 +20,10 @@ export default function Page() {
   useEffect(() => {
     fetchUsers();
   }, []);
-
+  if(status == "loading"){return;}
+  if(session.user.admin == false && status == "authenticated"){
+    window.location.replace("/");
+  }
   const handleViewClick = (id) => {
     window.location.replace(`/profile/${id}`);
   };
@@ -29,10 +34,10 @@ export default function Page() {
     if (confirmed) {
       const result = await deleteuser(email);
       if (result.ok) {
-        alert("User Deleted Successfully");
+        toast.success("User Deleted Successfully");
         fetchUsers();
       } else {
-        alert("Failed to delete user");
+        toast.error("Failed to delete user");
       }
     }
   };

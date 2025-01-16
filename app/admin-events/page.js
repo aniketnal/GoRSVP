@@ -2,8 +2,11 @@
 import React, { useState, useEffect } from "react";
 import PanelNav from "@/components/PanelNav";
 import { getalleventsadmin, deleteevent } from "@/actions/useractions";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 
 export default function Page() {
+  const { data: session, status } = useSession();
   const [events, setEvents] = useState([]);
   const fetchEvents = async () => {
     try {
@@ -17,7 +20,11 @@ export default function Page() {
   useEffect(() => {
     fetchEvents();
   }, []);
-
+  
+  if(status == "loading"){return;}
+  if(session.user.admin == false && status == "authenticated"){
+    window.location.replace("/");
+  }
   const handleViewClick = (id) => {
     window.location.replace(`/event/${id}`);
   };
@@ -26,10 +33,10 @@ export default function Page() {
       if (confirmed) {
         const result = await deleteevent(timestamp);
         if (result.ok) {
-          alert("Event Deleted Successfully");
+          toast.success("Event Deleted Successfully");
           fetchEvents();
         } else {
-          alert("Failed to delete event");
+          toast.error("Failed to delete event");
         }
       }
     };

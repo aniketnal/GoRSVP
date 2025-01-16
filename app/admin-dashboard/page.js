@@ -4,8 +4,11 @@ import PanelNav from "@/components/PanelNav";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { Users, Calendar, UserCog } from "lucide-react";
 import { fetchall } from "@/actions/useractions";
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function page() {
+  const { data: session, status } = useSession();
+
   const [users, setUsers] = useState([]);
   const [Orgs, setOrgs] = useState([]);
   const [Events, setEvents] = useState([]);
@@ -21,9 +24,16 @@ export default function page() {
     }
   };
 
+  console.log(session);
   useEffect(() => {
     fetcheverything();
   }, []);
+  
+  if(status == "loading"){return;}
+  if(session.user.admin == false && status == "authenticated"){
+    window.location.replace("/");
+  }
+
 
   const stats = [
     {

@@ -1,5 +1,5 @@
 import React from "react";
-
+//NOT USED
 const page = () => {
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">

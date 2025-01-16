@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { getevent, updateevent } from "@/actions/useractions";
+import { toast } from "react-toastify";
 
 const page = () => {
   const { data: session, status } = useSession();
@@ -64,10 +65,10 @@ const page = () => {
     try {
       const result = await updateevent(ts, event);
       if (result.ok) {
-        alert("Event updated successfully!");
+        toast.success("Event updated successfully!");
         window.location.replace("/");
       } else {
-        alert("Failed to update event.");
+        toast.error("Failed to update event.");
       }
     } catch (error) {
       console.error("Error updating event:", error);
