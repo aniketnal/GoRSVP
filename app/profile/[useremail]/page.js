@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getuser } from "@/actions/useractions";
+import { toast } from "react-toastify";
 const page = () => {
   const params = useParams();
   const useremail = decodeURIComponent(params.useremail);
@@ -10,7 +11,7 @@ const page = () => {
     try {
       const rep = await getuser(useremail);
       if (!rep.ok) {
-        alert("User not found");
+        toast.error("User not found");
         window.location.replace("/");
       } else {
         setresp(rep.user);

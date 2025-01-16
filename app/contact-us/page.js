@@ -23,11 +23,11 @@ const Page = () => {
         toast.success("We'll get back to you soon!");
         setFormData({ name: "", email: "", message: "" });
       } else {
-        alert("Please try again later, we're having some issues");
+        toast.error("Sorry, can't get to you rigt now !");
       }
     } catch (error) {
       console.error("Error saving contact:", error);
-      alert("Please try again later");
+      toast.error("Please try again later");
     }
   };
 

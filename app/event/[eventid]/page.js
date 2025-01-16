@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getevent, rsvpevent } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { toast } from "react-toastify";
 
 const page = () => {
   const { data: session, status } = useSession();
@@ -37,10 +38,10 @@ const page = () => {
       
       const data = await rsvpevent(Timestamp, email);
       if (data.ok) {
-        alert("Slot Reserved Successfully!");
+        toast.success("Slot Reserved Successfully!");
         setSize(size + 1);
       } else {
-        alert("You Might Have Already Registered for this Event");
+        toast.error("You Might Have Already Registered for this Event");
       }
     } catch (error) {
       console.error("Error fetching events:", error);
