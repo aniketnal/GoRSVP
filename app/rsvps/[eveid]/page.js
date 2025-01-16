@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import { checkinevent, checkoutevent, getevent } from "@/actions/useractions";
+import { toast } from "react-toastify";
 
 const page = () => {
   const { data: session, status } = useSession();
@@ -45,30 +46,30 @@ const page = () => {
   }
   const handleCheckboxChange = async (email, checked) => {
     if (checked) {
-      console.log(`Checkbox at index ${email} is checked`);
+      // console.log(`Checkbox at index ${email} is checked`);
       const resp = await checkinevent(eveid, email)
       if(resp.ok){
-        console.log("Checked in successfully")
+        toast.success(`${email} Checked in successfully`)
       }
       else{
-        console.log("Error checking in")
+        toast.error(`Error checking in for ${email}`)
       }
     }
     else{
         
         const resp = await checkoutevent(eveid, email)
       if(resp.ok){
-        console.log("Checked Out successfully")
+        toast.success(`${email} Checked Out successfully`)
       }
       else{
-        console.log("Error checking in")
+        toast.error(`Error checking in for ${email}`)
       }
     }
   };
 
   return (
     <>
-      <div className="min-h-screen bg-foreground mt-8 text-primary">
+      <div className="min-h-screen bg-foreground mt-8 text-primary ml-12">
         <div className="text-2xl font-bold text-center mb-4">All RSVPS for Event :{event.eventTitle}</div>
         <table className="ml-6 w-[80%] border-collapse text-primary bg-white rounded-lg overflow-hidden border border-primary">
           <thead>

@@ -36,7 +36,7 @@ const page = () => {
             {events.map((e) => (
               <div
                 key={e.Timestamp}
-                className="p-6 rounded-lg shadow-md hover:shadow-xl"
+                className="p-6 rounded-lg shadow-md hover:shadow-xl w-[30%] overflow-scroll h-[25rem]"
               >
                 <img
                   src={e.eventBanner}
