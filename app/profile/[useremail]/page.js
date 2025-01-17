@@ -11,8 +11,8 @@ const page = () => {
     try {
       const rep = await getuser(useremail);
       if (!rep.ok) {
+        window.location.replace("/not-found");
         toast.error("User not found");
-        window.location.replace("/");
       } else {
         setresp(rep.user);
       }
@@ -28,7 +28,6 @@ const page = () => {
 
   return (
     <>
-      {/* Change the page from here. available components - session.user.email, session.user.Name, session.user.image */}
       <div className="text-primary">
         <h2 className="ml-10 mt-10 text-2xl font-bold mb-8">User Profile</h2>
         {/* Main Content */}

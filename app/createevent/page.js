@@ -22,7 +22,9 @@ const Page = () => {
             }
       }
     }
-    orgconvertor();
+    if (status === "authenticated" && session) {
+      orgconvertor();
+    }
   }, [session,status]); //even if array is empty, runs twice. might be strict mode issue.
 
   //form logic

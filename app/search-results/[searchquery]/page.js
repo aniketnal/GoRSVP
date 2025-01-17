@@ -3,6 +3,7 @@ import React, { useEffect,useState } from "react";
 import { useParams } from "next/navigation";
 import { searchevents } from "@/actions/useractions";
 import { Zap } from "lucide-react";
+import { toast } from "react-toastify";
 
 const page = () => {
   const params = useParams();
@@ -13,8 +14,11 @@ const page = () => {
     try {
       const results = await searchevents(searchquery);
       if (results.ok) {
-        // console.log(results.events);
         setEvents(results.events);
+      }
+      if(results.events.length===0){
+        window.location.replace("/");
+        toast.error("No Such Event Found");
       }
     } catch (error) {
       console.log("Some eror occured", error);

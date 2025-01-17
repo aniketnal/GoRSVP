@@ -235,7 +235,6 @@ export const searchevents = async (msg) => {
     isDeleted: false,
   }).lean(); //$options:"i" -> case insensitive
   if (!events) {
-    window.location.replace("/");
     return { ok: false };
   }
   const plainEvents = events.map((event) => ({
