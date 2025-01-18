@@ -47,8 +47,17 @@ const [eventData, seteventData] = useState({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    const extractDriveId = (driveUrl) => {
+      const regex = /(?:drive\.google\.com\/file\/d\/|drive\.google\.com\/open\?id=|drive\.google\.com\/uc\?id=)([^\/&?]+)/;
+      const match = driveUrl.match(regex);
+      return match ? match[1] : null;
+    };
     try {
+      const driveId = extractDriveId(eventData.eventBanner);
+      if (driveId) {
+        eventData.eventBanner = `https://drive.google.com/thumbnail?id=${driveId}`;
+      }
+      //ek function to pass karo x and get the updated value
       const response = await saveevent(eventData);
       const upduser = await updateuserevent(session.user.email, eventData.Timestamp )
       if (response.ok && upduser.ok) {
