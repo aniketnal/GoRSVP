@@ -98,9 +98,9 @@ const Navbar = () => {
                     name="userOptions"
                     id="userOptions"
                     onChange={handleSelectChange}
-                    className="bg-transparent border-none focus:outline-none"
+                    className="bg-foreground  text-primary text-sm rounded-lg  block  w-32 p-2.5"
                   >
-                    <option className="hidden text-secondary" value="">
+                    <option className="hidden text-secondary " value="">
                       {" "}
                       Hi, {session.user.name}
                     </option>

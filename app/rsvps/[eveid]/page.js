@@ -69,9 +69,9 @@ const page = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-foreground mt-8 text-primary ml-12">
-        <div className="text-2xl font-bold text-center mb-4">All RSVPS for Event :{event.eventTitle}</div>
-        <table className="ml-6 w-[80%] border-collapse text-primary bg-white rounded-lg overflow-hidden border border-primary">
+      <div className="min-h-screen bg-foreground mt-8 text-primary flex  items-center flex-col">
+        <div className=" text-2xl font-bold text-center mb-4">All RSVPS for Event :{event.eventTitle}</div>
+        <table className="mx-auto w-[80%] border-collapse text-primary bg-white rounded-lg overflow-hidden border border-primary">
           <thead>
             <tr className="bg-[rgb(249,248,240)]">
               <th className="p-4 border-2 text-center border-primary">

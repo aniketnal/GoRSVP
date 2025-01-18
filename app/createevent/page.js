@@ -63,7 +63,9 @@ const [eventData, seteventData] = useState({
       if (response.ok && upduser.ok) {
         toast.success("We have listed your event!"); 
         seteventData({ eventTitle: "", eventDate: "", eventTime: "", eventLocation: "", eventCapacity: "", eventBanner: "", eventDescription: "",organizerEmail: session.user.email, organizerName : session.user.name,Timestamp: Date.now(), });
-        window.location.replace("/");
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 1500);
       } else {
         toast.error("Please try again later, we're having some issues");
       }
