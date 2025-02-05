@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { getevent, updateevent } from "@/actions/useractions";
 import { toast } from "react-toastify";
 
-const page = () => {
+const Page = () => {
   const { data: session, status } = useSession();
   const params = useParams();
 
@@ -231,4 +231,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

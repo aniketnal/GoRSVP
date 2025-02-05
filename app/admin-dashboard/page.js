@@ -6,7 +6,7 @@ import { Users, Calendar, UserCog } from "lucide-react";
 import { fetchall } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react"
 
-export default function page() {
+export default function Page() {
   const { data: session, status } = useSession();
 
   const [users, setUsers] = useState([]);

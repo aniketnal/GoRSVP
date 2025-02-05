@@ -15,12 +15,12 @@ export function middleware(request) {
   const isSigninPath = SigninPath.some((path) =>
     request.nextUrl.pathname.startsWith(path));
 
-  // Redirect to sign-in page if the user is not authenticated
+  // Redirect to sign-in Page if the user is not authenticated
   if (isProtectedPath && !token) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 
-  //won't let you go to signin page if you are already signed in
+  //won't let you go to signin Page if you are already signed in
   if (token && isSigninPath) {
     return NextResponse.redirect(new URL("/", request.url));
   }

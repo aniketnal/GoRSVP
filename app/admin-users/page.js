@@ -64,7 +64,7 @@ export default function Page() {
               </th>
               <th className="p-4 border-2 text-center border-primary">Name</th>
               <th className="p-4 border-2 text-center border-primary">
-                RSVP'd Events
+                RSVP&apos;d Events
               </th>
               <th className="p-4 border-2 text-center border-primary">
                 Is Organizer

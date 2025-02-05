@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getuser } from "@/actions/useractions";
 import { toast } from "react-toastify";
-const page = () => {
+const Page = () => {
   const params = useParams();
   const useremail = decodeURIComponent(params.useremail);
   const [resp, setresp] = useState([]);
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

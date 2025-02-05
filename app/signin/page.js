@@ -4,7 +4,7 @@ import React from "react";
 import { Github } from 'lucide-react';
 import { useSession, signIn, signOut } from "next-auth/react"
 
-const page = () => {
+const Page = () => {
 
   return (
     <>    
@@ -91,4 +91,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

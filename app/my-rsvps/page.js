@@ -4,7 +4,7 @@ import { getuserrsvps,getspecificevents } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 
-const page = () => {
+const Page = () => {
 
   const { data: session, status} = useSession();
 
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -5,7 +5,7 @@ import { getusersevent, deleteevent } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 
-const page = () => {
+const Page = () => {
   const { data: session, status } = useSession();
   const [events, setEvents] = useState([]);
   const fetchEvents = async () => {
@@ -69,7 +69,7 @@ const page = () => {
       {/* Event Dashboard */}
       <div className="flex justify-between mx-4">
         <h2 className="text-primary ml-8 text-xl mt-4 font-bold">
-          Organizer's Dashboard
+          Organizer&apos;s Dashboard
         </h2>
       </div>
       <div className="flex justify-center gap-12 mt-8">
@@ -112,7 +112,7 @@ const page = () => {
                 Location
               </th>
               <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">
-                RSVP's
+                RSVP&apos;s
               </th>
               <th className="p-4 text-center font-semibold border-r-2 border-b-2 border-primary">
                 Actions
@@ -196,4 +196,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

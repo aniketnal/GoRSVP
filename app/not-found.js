@@ -1,4 +1,5 @@
 "use client";
+import { Link } from "lucide-react";
 import React, { useState } from "react";
 
 const NotFound = () => {
@@ -13,12 +14,12 @@ const NotFound = () => {
           <p className="text-2xl text-center text-primary mt-4">WE ARE SORRY PAGE NOT FOUND!</p>
           <p className="text-lg text-center text-primary mt-2">THE PAGE YOU ARE LOOKING FOR MIGHT HAVE BEEN REMOVED, DELETED OR NEVER EXISTED.</p>
           <div className="mt-6 text-center">
-            <a
+            <Link
               href="/"
               className="bg-secondary text-white py-2 px-6 rounded"
             >
               GO BACK TO HOME
-            </a>
+            </Link>
           </div>
         </div>
       ) : (

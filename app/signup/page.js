@@ -1,6 +1,6 @@
 import React from "react";
 //NOT USED
-const page = () => {
+const Page = () => {
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
       <div className="bg-white shadow-md rounded-lg w-96 p-6">
@@ -121,4 +121,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

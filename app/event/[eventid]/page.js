@@ -7,7 +7,7 @@ import { getevent, rsvpevent } from "@/actions/useractions";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "react-toastify";
 
-const page = () => {
+const Page = () => {
   const { data: session, status } = useSession();
   const params = useParams();
   const eveid = params.eventid;
@@ -120,4 +120,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

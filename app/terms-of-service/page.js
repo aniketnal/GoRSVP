@@ -1,14 +1,14 @@
 import React from 'react'
 
 
-const page = () => {
+const Page = () => {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="w-3/4 px-8 rounded">
                 <h1 className="text-4xl font-bold mb-4 text-center text-secondary">Terms of Service</h1>
                 <p className="mb-4 text-lg text-primary">Welcome to GoRSVP. These terms and conditions outline the rules and regulations for the use of our website.</p>
                 <h2 className="text-2xl font-semibold mb-2 text-secondary">Acceptance of Terms</h2>
-                <p className="mb-4 text-primary">By accessing this website, we assume you accept these terms and conditions. Do not continue to use GoRSVP if you do not agree to all of the terms and conditions stated on this page.</p>
+                <p className="mb-4 text-primary">By accessing this website, we assume you accept these terms and conditions. Do not continue to use GoRSVP if you do not agree to all of the terms and conditions stated on this Page.</p>
                 <h2 className="text-2xl font-semibold mb-2 text-secondary">License</h2>
                 <p className="mb-4 text-primary">Unless otherwise stated, GoRSVP and/or its licensors own the intellectual property rights for all material on GoRSVP. All intellectual property rights are reserved. You may access this from GoRSVP for your own personal use subjected to restrictions set in these terms and conditions.</p>
                 <h2 className="text-2xl font-semibold mb-2 text-secondary">User Responsibilities</h2>
@@ -29,4 +29,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

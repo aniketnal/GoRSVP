@@ -6,7 +6,7 @@ import { useSession, signIn } from "next-auth/react";
 import { checkinevent, checkoutevent, getevent } from "@/actions/useractions";
 import { toast } from "react-toastify";
 
-const page = () => {
+const Page = () => {
   const { data: session, status } = useSession();
   const params = useParams();
   const eveid = params.eveid; // Ensure this matches the dynamic route parameter
@@ -112,4 +112,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

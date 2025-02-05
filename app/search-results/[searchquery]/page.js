@@ -5,7 +5,7 @@ import { searchevents } from "@/actions/useractions";
 import { Zap } from "lucide-react";
 import { toast } from "react-toastify";
 
-const page = () => {
+const Page = () => {
   const params = useParams();
   const searchquery = decodeURIComponent(params.searchquery);
 
@@ -69,4 +69,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
