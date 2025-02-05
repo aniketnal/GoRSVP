@@ -3,41 +3,52 @@ import React, { useEffect, useState }  from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { becomeorganizer,saveevent, updateuserevent } from "@/actions/useractions";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const { data: session, status } = useSession();
-  
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status !== "authenticated") {
+      toast.error("You need to sign in first");
+      router.replace("/signin"); // Use router.replace instead of window.location.replace
+    }
+  }, [status, router]);
+
   useEffect(() => {
     async function orgconvertor() {
-      if(session.user.organizer == false){
+      if (session?.user?.organizer === false) {
         try {
-              const response = await becomeorganizer(session.user);
-              if (response.ok) {
-                toast.success("You are now an organizer"); 
-              } else {
-                toast.error("Try again later");
-              }
-            } catch (error) {
-              console.error("Error making you organizer", error);
-            }
+          const response = await becomeorganizer(session.user);
+          if (response.ok) {
+            toast.success("You are now an organizer");
+          } else {
+            toast.error("Try again later");
+          }
+        } catch (error) {
+          console.error("Error making you organizer", error);
+          toast.error("Please try again later");
+        }
       }
     }
+
     if (status === "authenticated" && session) {
       orgconvertor();
     }
-  }, [session,status]); //even if array is empty, runs twice. might be strict mode issue.
+  }, [session, status]);
 
   //form logic
-const [eventData, seteventData] = useState({
+  const [eventData, seteventData] = useState({
     eventTitle: "",
     eventDate: "",
     eventTime: "",
     eventLocation: "",
+    eventDescription: "",
     eventCapacity: "",
     eventBanner: "",
-    eventDescription: "",
-    organizerEmail: session.user.email,
-    organizerName : session.user.name,
+    organizerEmail: session?.user?.email || "",
+    organizerName: session?.user?.name || "",
     Timestamp: Date.now(),
   });
 
@@ -45,33 +56,41 @@ const [eventData, seteventData] = useState({
     seteventData({ ...eventData, [e.target.name]: e.target.value });
   };
 
+  const extractDriveId = (driveUrl) => {
+    const regex = /(?:drive\.google\.com\/file\/d\/|drive\.google\.com\/open\?id=|drive\.google\.com\/uc\?id=)([^\/&?]+)/;
+    const match = driveUrl.match(regex);
+    return match ? match[1] : null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const extractDriveId = (driveUrl) => {
-      const regex = /(?:drive\.google\.com\/file\/d\/|drive\.google\.com\/open\?id=|drive\.google\.com\/uc\?id=)([^\/&?]+)/;
-      const match = driveUrl.match(regex);
-      return match ? match[1] : null;
-    };
     try {
       const driveId = extractDriveId(eventData.eventBanner);
       if (driveId) {
-        eventData.eventBanner = `https://drive.google.com/thumbnail?id=${driveId}`;
+        eventData.eventBanner = `https://drive.google.com/uc?id=${driveId}`;
       }
-      //ek function to pass karo x and get the updated value
       const response = await saveevent(eventData);
-      const upduser = await updateuserevent(session.user.email, eventData.Timestamp )
+      const upduser = await updateuserevent(session.user.email, eventData.Timestamp);
       if (response.ok && upduser.ok) {
-        toast.success("We have listed your event!"); 
-        seteventData({ eventTitle: "", eventDate: "", eventTime: "", eventLocation: "", eventCapacity: "", eventBanner: "", eventDescription: "",organizerEmail: session.user.email, organizerName : session.user.name,Timestamp: Date.now(), });
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 1500);
+        toast.success("We have listed your event!");
+        seteventData({
+          eventTitle: "",
+          eventDate: "",
+          eventTime: "",
+          eventLocation: "",
+          eventCapacity: "",
+          eventBanner: "",
+          eventDescription: "",
+          organizerEmail: session.user.email,
+          organizerName: session.user.name,
+          Timestamp: Date.now(),
+        });
       } else {
-        toast.error("Please try again later, we're having some issues");
+        toast.error("Failed to list your event. Please try again.");
       }
     } catch (error) {
-      console.error("Error saving Event:", error);
-      toast.error("Please Fill out all fields");
+      console.error("Error saving event:", error);
+      toast.error("An error occurred. Please try again.");
     }
   };
  
