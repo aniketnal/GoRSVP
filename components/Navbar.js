@@ -8,7 +8,7 @@ import { Plus, User } from "lucide-react";
 const Navbar = () => {
   const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
-  const handleSelectChange = (e) => {
+  const handleSelectChange =async (e) => {
     const selectedOption = e.target.value;
     switch (selectedOption) {
       case "Profile":
@@ -20,8 +20,7 @@ const Navbar = () => {
         window.location.replace(`/organizer-dashboard`);
         break;
       case "SignOut":
-        window.location.replace(`/`);
-        signOut();
+        await signOut({ callbackUrl: '/' });
         break;
       case "MyRSVP":
         window.location.replace(`/my-rsvps`);

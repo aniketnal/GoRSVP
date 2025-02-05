@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export function middleware(request) {
   // token exists only when session is created and user is signed in .
 
-  const token = request.cookies.get("next-auth.session-token");
+  const token = request.cookies.get("next-auth.session-token") || request.cookies.get("__Secure-next-auth.session-token");
   //paths where signin required
   const protectedPaths = ["/createevent","/editevent","/organizer-dashboard","/admin-dashboard","/my-rsvps","/my-events","/profile","/rsvps","/admin-events","/admin-organizers","/admin-users"];
   const SigninPath = ["/signin"];

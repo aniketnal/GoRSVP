@@ -12,7 +12,7 @@ const Page = () => {
   useEffect(() => {
     if (status !== "authenticated") {
       toast.error("You need to sign in first");
-      router.replace("/signin"); // Use router.replace instead of window.location.replace
+      router.replace("/signin"); 
     }
   }, [status, router]);
 
