@@ -85,6 +85,9 @@ const Page = () => {
           organizerName: session.user.name,
           Timestamp: Date.now(),
         });
+        setTimeout(() => {
+          window.location.replace("/")
+        }, 1500);
       } else {
         toast.error("Failed to list your event. Please try again.");
       }

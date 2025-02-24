@@ -100,6 +100,7 @@ const Page = () => {
                 key={e.Timestamp}
                 className="p-6 rounded-lg shadow-md hover:shadow-xl w-[30%] overflow-scroll h-[25rem]"
               >
+                {/* Image tag can be used for more optimized image loading */}
                 <img
                   src={e.eventBanner}
                   className="border rounded-lg text-primary h-44 w-80"
